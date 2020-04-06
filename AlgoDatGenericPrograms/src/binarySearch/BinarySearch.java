@@ -5,21 +5,26 @@ public class BinarySearch {
 public static void main(String[] args)
 {
 	int[] array = new int[] {1,51,61,80,91,104,201,301,401,910,1001};
-	System.out.println(binarySearch(array,1001));
+	System.out.println(binarySearch(array,1));
+	int sum = 0;
+	int n = 1024;
+    for (int i = 1; i <= 4*n*n; i = i*3)
+        sum++;
+	System.out.println(sum);
+	
 }
 
 public static int binarySearch(int[] array, int key)
 {
-	int lo = 0; 
-	int high = array.length;
-	while (lo <= high)
+	int lo = 0; int hi = array.length - 1;
+	while (lo <= hi)
 	{
-		int mid = lo + (high - lo) / 2;
+		int mid = lo + (hi - lo) / 2;
 		if (key < array[mid])
 		{
-			high = mid -1;
+			hi = mid - 1;
 		}
-		if (key > array[mid])
+		else if (key > array[mid])
 		{
 			lo = mid + 1;
 		}
