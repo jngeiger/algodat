@@ -25,13 +25,18 @@ public double product()
 	return this.x * this.y;
 }
 
+public double getDifference(Point o) {
+	return Math.sqrt(Math.pow(o.x - this.x, 2.0) + Math.pow(o.y - this.y, 2.0));
+}
+
 
 public static void main(String[] args)
 {
-	Point a = new Point(2,3);
-	Point b = new Point(4,7);
+	
+	// Define Problem size
 	Point[] array = new Point[4096];
 	
+	// Put random Points in array that differ from each other, probably much easier solution possible
 	for (int i = 0; i < array.length; i++)
 	{
 		array[i] = new Point((int)(Math.random()*10000) + 1, (int)(Math.random()*10000) + 1);
@@ -53,8 +58,8 @@ public static void main(String[] args)
 		}
 	}
 			
-	List<Point> list = Arrays.asList(array);
-	
+
+	// Sort array by multiplicating coordinates
 	Arrays.sort(array,  new Comparator<Point>() {
 		public int compare(Point p1, Point p2)
 		{
@@ -62,6 +67,8 @@ public static void main(String[] args)
 			else if (p1.product() > p2.product()) {return 1;}
 			else { return 0; }
 		}});
+	
+	// The following lines were used for debugging
 //	boolean check = false;
 //	for (int i = 0; i < array.length -1; i++)
 //	{
@@ -76,7 +83,9 @@ public static void main(String[] args)
 	
 	
 	try {
+		// run trivial algorithm, print runtime and solution
 		getLowestDistance(array);
+		// run improved algorithm, print runtime and solution
 		fastLowestDistance(array);
 	}
 	catch (Exception e)
@@ -86,16 +95,10 @@ public static void main(String[] args)
 }
 
 
-public double getDifference(Point o) {
-	return Math.sqrt(Math.pow(o.x - this.x, 2.0) + Math.pow(o.y - this.y, 2.0));
-}
+
 
 private static void getLowestDistance(Point[] array) throws Exception
 {
-	if (array.length < 2)
-	{
-		throw new Exception("Array too small!");
-	}
 	var x = System.nanoTime();
 	var lowestDistance = array[0].getDifference(array[1]);
 	Point a = array[0];
@@ -118,8 +121,12 @@ private static void getLowestDistance(Point[] array) throws Exception
 	
 }
 
-public static void fastLowestDistance(Point[] array) throws Exception
+private static void fastLowestDistance(Point[] array) throws Exception
 {
+	if (array.length < 2)
+	{
+		throw new Exception("Array too small!");
+	}
 	Point a = array[0];
 	Point b = array[1];
 	var x = System.nanoTime();
