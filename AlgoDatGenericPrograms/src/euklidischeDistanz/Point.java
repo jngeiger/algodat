@@ -99,6 +99,10 @@ public static void main(String[] args)
 
 private static void getLowestDistance(Point[] array) throws Exception
 {
+	if (array.length < 2)
+	{
+		throw new Exception("Array too small!");
+	}
 	var x = System.nanoTime();
 	var lowestDistance = array[0].getDifference(array[1]);
 	Point a = array[0];
@@ -127,10 +131,10 @@ private static void fastLowestDistance(Point[] array) throws Exception
 	{
 		throw new Exception("Array too small!");
 	}
-	Point a = array[0];
-	Point b = array[1];
 	var x = System.nanoTime();
 	var lowestDistance = array[0].getDifference(array[1]);
+	Point a = array[0];
+	Point b = array[1];
 	for (int i = 0; i < array.length - 1; i++)
 		if (array[i].getDifference(array[i+1]) < lowestDistance)
 		{
