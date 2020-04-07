@@ -68,10 +68,6 @@ public static void main(String[] args)
 	
 	Point[] arrX = new Point[problemSize];
 	System.arraycopy(array, 0, arrX, 0, problemSize);
-	for (Point p : arrX)
-	{
-		//System.out.println(p);
-	}
 	
 	Arrays.sort(array,  new Comparator<Point>() {
 		public int compare(Point p1, Point p2)
@@ -82,10 +78,6 @@ public static void main(String[] args)
 		}});
 	Point[] arrY = new Point[problemSize];
 	System.arraycopy(array, 0, arrY, 0, problemSize);
-	for (Point p : arrY)
-	{
-		System.out.println(p);
-	}
 	
 	// The following lines were used for debugging
 //	boolean check = false;
