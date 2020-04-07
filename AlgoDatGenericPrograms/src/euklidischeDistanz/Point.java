@@ -20,10 +20,6 @@ public String toString()
 	return "(" + (int)this.x + "," + (int)this.y + ")";
 }
 
-public double product()
-{
-	return this.x * this.y;
-}
 
 public double getDifference(Point o) {
 	return Math.sqrt(Math.pow(o.x - this.x, 2.0) + Math.pow(o.y - this.y, 2.0));
@@ -34,7 +30,8 @@ public static void main(String[] args)
 {
 	
 	// Define Problem size
-	Point[] array = new Point[4096];
+	int problemSize = 20;
+	Point[] array = new Point[problemSize];
 	
 	// Put random Points in array that differ from each other, probably much easier solution possible
 	for (int i = 0; i < array.length; i++)
@@ -57,16 +54,38 @@ public static void main(String[] args)
 			}
 		}
 	}
-			
+	
 
 	// Sort array by multiplicating coordinates
 	Arrays.sort(array,  new Comparator<Point>() {
 		public int compare(Point p1, Point p2)
 		{
-			if (p1.product() < p2.product()) { return -1; }
-			else if (p1.product() > p2.product()) {return 1;}
+			if (p1.x < p2.x) { return -1; }
+			else if (p1.x > p2.x) {return 1;}
 			else { return 0; }
 		}});
+	
+	
+	Point[] arrX = new Point[problemSize];
+	System.arraycopy(array, 0, arrX, 0, problemSize);
+	for (Point p : arrX)
+	{
+		//System.out.println(p);
+	}
+	
+	Arrays.sort(array,  new Comparator<Point>() {
+		public int compare(Point p1, Point p2)
+		{
+			if (p1.y < p2.y) { return -1; }
+			else if (p1.y > p2.y) {return 1;}
+			else { return 0; }
+		}});
+	Point[] arrY = new Point[problemSize];
+	System.arraycopy(array, 0, arrY, 0, problemSize);
+	for (Point p : arrY)
+	{
+		System.out.println(p);
+	}
 	
 	// The following lines were used for debugging
 //	boolean check = false;
@@ -79,14 +98,14 @@ public static void main(String[] args)
 //				}
 //	}
 //	System.out.println(check);
-//	
 	
+
 	
 	try {
 		// run trivial algorithm, print runtime and solution
-		getLowestDistance(array);
+		//getLowestDistance(array);
 		// run improved algorithm, print runtime and solution
-		fastLowestDistance(array);
+		//fastLowestDistance(array);
 	}
 	catch (Exception e)
 	{
