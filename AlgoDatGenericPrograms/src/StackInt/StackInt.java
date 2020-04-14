@@ -1,9 +1,5 @@
 package StackInt;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-
 public class StackInt {
 private Integer top;
 private Integer[] array;
@@ -21,8 +17,12 @@ public void push(int aValue)
 	array[top++] = aValue;
 }
 
-public int pop()
+public int pop() throws Exception
 { 
+	if (isEmpty())
+	{
+		throw new Exception("Stack is empty, nothing to pop");
+	}
 	int temp = array[--top];
 	array[top] = null;
 	if (top == array.length / 4)
@@ -30,7 +30,7 @@ public int pop()
 	return temp;
 }
 
-public void resize(int size)
+private void resize(int size)
 {
 	Integer[] arrayTemp = new Integer[size];
 	for (int i = 0; i < top; i++)
@@ -61,12 +61,30 @@ public static void main(String[] args)
 	s1.push(10);
 	s1.push(5);
 	s1.push(2);
+	try {
 	s1.pop();
 	s1.pop();
 	s1.pop();
+	}
+	catch (Exception e)
+	{
+		System.out.println(e.getMessage());
+	}
+
+	
 	System.out.println(s1.isEmpty());
 	System.out.println(s1.array.length);
 	s1.print();
+	
+	try {
+		s1.pop();
+		s1.pop();
+		s1.pop();
+		}
+	catch (Exception e)
+		{
+		System.out.println(e.getMessage());
+		}
 	
 	
 }
