@@ -1,7 +1,7 @@
 package GenericStack;
 
 public class TestClass {
-public static void main(String[] args)
+public static void main(String[] args) throws Exception
 {
 	var s0 = new GenericStack0<String>();
 	var s1 = new GenericStack1<String>();
@@ -10,7 +10,7 @@ public static void main(String[] args)
 	t0.doSomething(s1);
 }
 
-public void doSomething(SomeStack<? super String> s0)
+public void doSomething(SomeStack<? super String> s0) throws Exception
 {
 	
 	s0.push("Hello");

@@ -12,7 +12,7 @@ public GenericStack1()
 }
 
 @Override
-public T pop() {
+public T pop() throws Exception {
 	// TODO Auto-generated method stub
 	_shrink();
 	return array[--top];
