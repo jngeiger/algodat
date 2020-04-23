@@ -12,7 +12,6 @@ public static void main(String[] args) throws Exception
 
 public void doSomething(SomeStack<? super String> s0) throws Exception
 {
-	
 	s0.push("Hello");
 	s0.push("World");
 	//Check grow method
