@@ -1,4 +1,4 @@
-package sampleQueue;
+package abstractQueue;
 
 public class Queue<T> extends SampleQueue<T> {
 

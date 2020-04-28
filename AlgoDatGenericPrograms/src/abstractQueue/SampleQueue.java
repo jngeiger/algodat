@@ -1,4 +1,4 @@
-package sampleQueue;
+package abstractQueue;
 
 public abstract class SampleQueue<T> {
 protected T[] array;
