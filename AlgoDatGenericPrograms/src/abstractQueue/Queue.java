@@ -1,6 +1,10 @@
 package abstractQueue;
 
 public class Queue<T> extends SampleQueue<T> {
+private T[] array;
+private int first;
+private int last;
+
 
 @SuppressWarnings("unchecked")
 public Queue()
@@ -102,10 +106,10 @@ private void _debug()
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		Queue<String> q1 = new Queue<String>();
-		System.out.println(q1.checkEmpty()); // true
+		
 		q1.put("Hello");
 		q1._debug(); //First: 0 Last: 1 Array Size: 1
-		System.out.println(q1.checkEmpty()); // false
+	
 		
 		q1.put("World"); 
 		q1._debug(); //First: 0 Last: 2 Array Size: 2
