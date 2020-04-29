@@ -59,7 +59,8 @@ private void _growIfNeeded(int size) throws Exception
 	{
 	T[] temp = (T[]) new Object[size];
 	int i = 0;
-	while (true)
+	boolean finished = false;
+	do
 	{
 		try {
 			temp[i] = get();
@@ -67,9 +68,9 @@ private void _growIfNeeded(int size) throws Exception
 		}
 		catch (Exception e)
 		{
-			break;
+			finished = true;
 		}
-	}
+	} while (!finished);
 	first = 0;
 	last = i;
 	array = temp;
