@@ -93,21 +93,4 @@ public class List<T> extends OurList<T> {
 
 	// #####     #####     #####     #####     #####     #####
 	
-	static public void main(String args[])
-	{
-		List<Integer> l = new List<Integer>();
-		
-		l.insert(1);
-		l.insert(11);
-		l.insert(111);
-		l.insert(1111);
-		System.out.println(l + "\n");
-		l.insert(2,2);
-		
-		System.out.println(l + "\n");
-		
-		Function<Integer, Boolean> isEven = a -> {return (a % 2) != 0;};
-		l.delete(isEven);
-		System.out.println(l + "\n");
-	}
 }
