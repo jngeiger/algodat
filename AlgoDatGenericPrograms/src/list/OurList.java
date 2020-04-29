@@ -47,5 +47,7 @@ public static void main(String[] args)
 		l2.delete(isEven);
 		System.out.println(l2 + "\n");
 		System.out.println(l2.toStringReverse() + "\n");
+		
+		
 }
 }

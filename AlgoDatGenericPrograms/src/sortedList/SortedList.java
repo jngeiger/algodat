@@ -2,11 +2,6 @@ package sortedList;
 
 import java.util.function.Function;
 
-
-
-
-
-
 public class SortedList<T extends Comparable<T>> extends OurList<T> {
 private Node head = null;
 private Node tail = null;
@@ -20,13 +15,33 @@ private Node tail = null;
 		{
 			head = new Node(ele);
 		}
+		
 		else
 		{
-			Node temp = head;
-			head = new Node(ele);
-			head.next = temp;
+			Node current = head;
+			Node element = new Node(ele);
+			
+			if (element.data.compareTo(current.data) > 0)
+			{
+				Node temp = current;
+				head = element;
+				element.next = temp;
+				return;
+			}
+			
+			while ((current.next != null) && element.data.compareTo(current.next.data) < 0)
+			{
+				current = current.next;
+			}
+			Node temp = current.next;
+			current.next = element;
+			element.next = temp;
+			
+			
+			
+			
 		}
-		sortList();
+		
 	}
 
 	@Override
@@ -106,24 +121,24 @@ private Node tail = null;
 	
 	private class Node {
 	    private Node next;
-	    private Node prev;
 	    private T data;
 	    
 	    Node (T data) {
 		      this.data = data;
 		      this.next = null;
-		      this.prev = null;
 		    }
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SortedList<String> s1 = new SortedList<String>();
+		s1.insert("M");
 		s1.insert("X");
-		s1.insert("S");
-		s1.insert("Y");
-		s1.insert("B");
+		s1.insert("F");
+		s1.insert("C");
 		s1.insert("A");
+		//s1.insert("C");
+		
 		System.out.println(s1);
 	}
 }

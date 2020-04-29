@@ -106,34 +106,47 @@ private void _debug()
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		Queue<String> q1 = new Queue<String>();
-		
-		q1.put("Hello");
-		q1._debug(); //First: 0 Last: 1 Array Size: 1
-	
-		
-		q1.put("World"); 
-		q1._debug(); //First: 0 Last: 2 Array Size: 2
-		
-		q1.put("Test");
-		q1.put("123");
-		q1._debug(); // First: 0 Last: 4 Array Size: 4
-		System.out.println(q1.get());  // Hello
-		q1.put("another test");
-		q1._debug(); //First: 1 Last: 1 Array Size: 4
-		
-		System.out.println(q1.get()); // World
-		q1.put("Blub");
-		System.out.println(q1.get()); // Test
-		System.out.println(q1.get()); // 123
-		q1._debug(); // First: 4 Last: 2 Array Size: 4
-		System.out.println(q1._getArrayElements()); // 2 -> OK
-		System.out.println(q1.get());// another test
-		System.out.println(q1._getArrayElements()); // 1 - > OK
-		q1._debug(); // First: 0 Last: 1 Array Size: 2 -> OK
-		System.out.println(q1.get()); //-> Blub
-		q1._debug(); // Array Size: 1 -> OK
-		System.out.println(q1._getArrayElements()); // 0 -> OK
-		
+//		
+//		q1.put("Hello");
+//		q1._debug(); //First: 0 Last: 1 Array Size: 1
+//	
+//		
+//		q1.put("World"); 
+//		q1._debug(); //First: 0 Last: 2 Array Size: 2
+//		
+//		q1.put("Test");
+//		q1.put("123");
+//		q1._debug(); // First: 0 Last: 4 Array Size: 4
+//		System.out.println(q1.get());  // Hello
+//		q1.put("another test");
+//		q1._debug(); //First: 1 Last: 1 Array Size: 4
+//		
+//		System.out.println(q1.get()); // World
+//		q1.put("Blub");
+//		System.out.println(q1.get()); // Test
+//		System.out.println(q1.get()); // 123
+//		q1._debug(); // First: 4 Last: 2 Array Size: 4
+//		System.out.println(q1._getArrayElements()); // 2 -> OK
+//		System.out.println(q1.get());// another test
+//		System.out.println(q1._getArrayElements()); // 1 - > OK
+//		q1._debug(); // First: 0 Last: 1 Array Size: 2 -> OK
+//		System.out.println(q1.get()); //-> Blub
+//		q1._debug(); // Array Size: 1 -> OK
+//		System.out.println(q1._getArrayElements()); // 0 -> OK
+		q1.put("c");
+		q1.put("s");
+		q1.put("t");
+		q1.put("j");
+		System.out.println(q1.get());
+		System.out.println(q1.get());
+		q1.put("f");
+		q1.put("t");
+		q1.put("jk");
+		q1._debug();
+		System.out.println(q1.get());
+		System.out.println(q1.get());
+		System.out.println(q1.get());
+		System.out.println(q1.get());
 		
 		
 	}
