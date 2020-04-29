@@ -23,7 +23,7 @@ public T get() throws Exception
 {
 	if (isEmpty())
 	{
-		throw new Exception("Queue empty (get)");
+		throw new NullPointerException("Queue empty (get)");
 	}
 	if (first == array.length)
 	{
@@ -53,7 +53,7 @@ public void put(T element) throws Exception
 }
 
 @SuppressWarnings("unchecked")
-private void _growIfNeeded(int size) throws Exception
+private void _growIfNeeded(int size) throws Exception 
 {
 	if (_getArrayElements() == array.length - 1)
 	{
@@ -66,7 +66,7 @@ private void _growIfNeeded(int size) throws Exception
 			temp[i] = get();
 			i++;
 		}
-		catch (Exception e)
+		catch (NullPointerException e)
 		{
 			finished = true;
 		}
@@ -160,6 +160,7 @@ private void _debug()
 		System.out.println(q1.get());
 		System.out.println(q1.get());
 		System.out.println(q1.get());
+		
 
 		
 		
