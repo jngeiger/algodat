@@ -1,5 +1,7 @@
 package abstractQueue;
 
+import java.util.Arrays;
+
 public class Queue<T> extends SampleQueue<T> {
 private T[] array;
 private int first;
@@ -16,24 +18,26 @@ public Queue()
 
 public boolean isEmpty()
 {
-	return (first == last && array[first] == null);
+	return (((first == last) && first == array.length) || ((first == last) && array[first] == null));
 }
 
 public T get() throws Exception
 {
 	if (isEmpty())
 	{
-		throw new NullPointerException("Queue empty (get)");
+		throw new Exception("Queue empty (get)");
 	}
 	if (first == array.length)
 	{
 		first = 0;
 	}
+	
+	
 	T temp = array[first];
 	array[first] = null;
 	first++;
 	
-	_shrinkIfNeeded(array.length / 2);
+	//_shrinkIfNeeded(array.length / 2);
 	
 	return temp;
 	
@@ -43,7 +47,7 @@ public void put(T element) throws Exception
 {
 	_growIfNeeded(2*array.length);
 	
-	if (last == array.length && array[0] == null)
+	if ((last == array.length) && (array[0] == null))
 	{
 		last = 0;
 	}
@@ -55,22 +59,16 @@ public void put(T element) throws Exception
 @SuppressWarnings("unchecked")
 private void _growIfNeeded(int size) throws Exception 
 {
-	if (_getArrayElements() == array.length - 1)
+	if (_getArrayElements() == array.length)
 	{
 	T[] temp = (T[]) new Object[size];
 	int i = 0;
-	boolean finished = false;
-	do
+	
+	while (!isEmpty())
 	{
-		try {
-			temp[i] = get();
-			i++;
-		}
-		catch (NullPointerException e)
-		{
-			finished = true;
-		}
-	} while (!finished);
+		temp[i] = get();
+		i++;
+	}
 	first = 0;
 	last = i;
 	array = temp;
@@ -119,17 +117,23 @@ private void _debug()
 		
 		q1.put("Hello");
 		q1._debug(); //First: 0 Last: 1 Array Size: 1
+		System.out.println(Arrays.deepToString(q1.array));
 	
 		
 		q1.put("World"); 
+		System.out.println(Arrays.deepToString(q1.array));
 		q1._debug(); //First: 0 Last: 2 Array Size: 2
 		
 		q1.put("Test");
+		System.out.println(Arrays.deepToString(q1.array));
+		q1._debug();
 		q1.put("123");
 		q1._debug(); // First: 0 Last: 4 Array Size: 4
 		System.out.println(q1.get());  // Hello
+		q1._debug();
 		q1.put("another test");
 		q1._debug(); //First: 1 Last: 1 Array Size: 4
+		System.out.println(Arrays.deepToString(q1.array));
 		
 		System.out.println(q1.get()); // World
 		q1.put("Blub");
@@ -160,7 +164,7 @@ private void _debug()
 		System.out.println(q1.get());
 		System.out.println(q1.get());
 		System.out.println(q1.get());
-		
+//		
 
 		
 		
