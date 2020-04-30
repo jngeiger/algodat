@@ -1,14 +1,6 @@
-abstract class SampleQueue<T> 
-{
-	
-abstract protected T get() throws Exception;
-abstract protected void put(T element) throws Exception;
-abstract protected boolean isEmpty();
+package abstractQueue;
 
-}
-
-
-public class Queue<T> extends SampleQueue<T> 
+public class QueueStefan<T> extends SampleQueue<T> 
 {
 	
 private T[] array;
@@ -17,7 +9,7 @@ private int last;
 private int count;
 
 @SuppressWarnings("unchecked")
-public Queue()
+public QueueStefan()
 {
     this.first = 0;
     this.last = 0;
@@ -156,7 +148,7 @@ public Queue()
     	q2.put("World");
     	q2.put("Servus");
     	q2.put("Welt");
-    	System.out.println(q2.getLength());
+    	
     	
     	
     	System.out.println(q2.get());
@@ -164,11 +156,6 @@ public Queue()
     	System.out.println(q2.get());
     	System.out.println(q2.get());
     	
-    	System.out.println(q2.count);
-    
-    	
-    	
-    	System.out.println(q2.getLength());
   
    
     }
