@@ -1,6 +1,14 @@
-package abstractQueue;
+abstract class SampleQueue<T> 
+{
+	
+abstract protected T get() throws Exception;
+abstract protected void put(T element) throws Exception;
+abstract protected boolean isEmpty();
 
-public class QueueStefan<T> extends SampleQueue<T> 
+}
+
+
+public class Queue<T> extends SampleQueue<T> 
 {
 	
 private T[] array;
@@ -9,7 +17,7 @@ private int last;
 private int count;
 
 @SuppressWarnings("unchecked")
-public QueueStefan()
+public Queue()
 {
     this.first = 0;
     this.last = 0;
@@ -18,11 +26,16 @@ public QueueStefan()
    
     protected T get() throws Exception
     {
+    	
+    	
     	T temp;
+    	
     	if (isEmpty())
     	{
     		throw new Exception("isch leer");
     	}
+
+    	
     	count--;
     	
     	if(first == array.length)
@@ -31,6 +44,7 @@ public QueueStefan()
     	}
     	temp = array[first];
     	array[first++] = null;
+    	shrinkIfNeeded();
         return temp;
     }
 
@@ -75,6 +89,23 @@ public QueueStefan()
     	last = (array.length/2);
     }
     
+    private void shrinkIfNeeded() throws Exception
+    {
+        if (count <= (array.length / 4))
+        {
+        	int temp = count;
+            T[] newArr = (T[]) new Object[array.length/2];
+            for(int i=0; i<temp; i++)
+            {
+            	newArr[i] = get();
+            	count++;
+            }
+            array = newArr;
+            first = 0;
+            last = (count);
+        }
+    }
+    
     protected boolean isFull()
     {
     	return (count == array.length);
@@ -86,16 +117,20 @@ public QueueStefan()
     	return (count == 0);
     }
     
+    public int getLength()
+    {
+    	return array.length;
+    }
     
     public static void main(String [] args) throws Exception
     {
-    	QueueStefan<String> q = new QueueStefan<String>();
-        QueueStefan<String> q1 = new QueueStefan<String>();
+    	Queue<String> q = new Queue<String>();
+        
     	
     	q.put("Hello");
     	q.put("World");
     	q.put("Test");
-    	System.out.println(q.array.length);
+ 
     	
     	System.out.println(q.get());
     	System.out.println(q.get());
@@ -113,9 +148,32 @@ public QueueStefan()
     	System.out.println(q.get());
     	
     	q.put("blablatest");
+    	
+    	
+    	Queue<String> q2 = new Queue<String>();
+    	
+    	q2.put("Hello");
+    	q2.put("World");
+    	q2.put("Servus");
+    	q2.put("Welt");
+    	System.out.println(q2.getLength());
+    	
+    	
+    	System.out.println(q2.get());
+    	System.out.println(q2.get());
+    	System.out.println(q2.get());
+    	System.out.println(q2.get());
+    	
+    	System.out.println(q2.count);
+    
+    	
+    	
+    	System.out.println(q2.getLength());
   
    
     }
 
 }
+
+
 
