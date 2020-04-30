@@ -95,7 +95,7 @@ public QueueStefan()
     	q.put("Hello");
     	q.put("World");
     	q.put("Test");
- 
+    	System.out.println(q.array.length);
     	
     	System.out.println(q.get());
     	System.out.println(q.get());
