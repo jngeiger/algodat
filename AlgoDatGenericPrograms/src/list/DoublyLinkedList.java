@@ -104,7 +104,7 @@ public String toStringReverse()
 		}
 	}
 
-	return str + ("\n DEBUG: END OF LL AFTER" + counter + " ELEMENTS REACHED");
+	return str;
 }
 
 private class Node {
