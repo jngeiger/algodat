@@ -11,13 +11,14 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 	@Override
 	public void insert(T ele) 
 	{
-		
+		// Base case, if LL is empty
 		if (head == null)
 		{
 			head = new Node(ele);
 			return;
 		}
-
+		
+		// This case is called if the given element is greater than the first element in the list => the element will be the new head. Similar to the basic LL implementation
 		if(_isGreater(head.element, ele))
 		{
 			Node temp2 = new Node(ele);
@@ -25,8 +26,10 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 			head = temp2;
 			return;
 		}
-		Node current = head;
 		
+		// This is called if neither the base case nor the second case if given. The LL will be iterated until the next element in the list is greater than the given one.
+		// OR the end of the LL is reached. Starting from line 37 the insertion process is started.
+		Node current = head;
 		while (current.next != null && !_isGreater(current.next.element, ele))
 		{
 			current = current.next;
@@ -36,10 +39,10 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		current.next = temp;
 	}
 		
-	
+	//This returns 'true' if the first element is bigger or equal to the last
 	private boolean _isGreater(T element1, T element2)
 	{
-		if(element1.compareTo(element2) < 0 )
+		if(element1.compareTo(element2) <= 0 )
 		{
 			return false;
 		}
