@@ -18,7 +18,7 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 			return;
 		}
 
-		if(!_isGreater(head.element, ele))
+		if(_isGreater(head.element, ele))
 		{
 			Node temp2 = new Node(ele);
 			temp2.next = head;
@@ -27,7 +27,7 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		}
 		Node current = head;
 		
-		while (current.next != null && _isGreater(current.next.element, ele))
+		while (current.next != null && !_isGreater(current.next.element, ele))
 		{
 			current = current.next;
 		}
@@ -127,23 +127,39 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 //		list2.insert("a");
 		
 		
-		System.out.println(list2.toString());
+//		System.out.println(list2.toString());
 		
 		SortedList<String> list3 = new SortedList<String>();
+		SortedList<Integer> listInt = new SortedList<Integer>();
 		
-		list3.insert("c");
+		for (int i = 0; i < 100; i++)
+		{
+			listInt.insert(((int)(Math.random() * 100)));
+		}
+		System.out.println(listInt);
+		
+//		list3.insert("c");
+//		list3.insert("b");
+//		list3.insert("a");
+	
+		list3.insert("z");
+		list3.insert("x");
+		list3.insert("k");
+		list3.insert("m");
 		list3.insert("b");
 		list3.insert("a");
 		
+		
+		
 		System.out.println(list3.toString());
 		
-		list2.insert("z");
-		list2.insert("f");
-		list2.insert("b");
-		System.out.println(list2);
-		
-		list2.delete(x -> x.contains("f"));
-		System.out.println(list2);
+//		list2.insert("z");
+//		list2.insert("f");
+//		list2.insert("b");
+//		System.out.println(list2);
+//		
+//		list2.delete(x -> x.contains("f"));
+//		System.out.println(list2);
 	}
 
 
