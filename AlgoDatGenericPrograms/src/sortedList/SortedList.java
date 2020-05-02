@@ -3,6 +3,7 @@ package sortedList;
 import java.util.function.Function;
 
 
+
 public class SortedList<T extends Comparable<T>> extends OurList<T> 
 {
 	private Node head = null;
@@ -57,7 +58,30 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 	@Override
 	public boolean delete(Function<T, Boolean> func) 
 	{
-	
+		Node current = head;
+		// Test whether first node has to be deleted
+		if (func.apply(current.element))
+		{
+			head = current.next;
+			return true;
+		}
+		
+		// Check rest of list
+		Node prev = current;
+		current = current.next;
+		while (current != null)
+		{
+			if (func.apply(current.element))
+			{
+				// node to be deleted has been found
+				prev.next = current.next;
+				return true;
+			}
+			// Update of current and previous
+			prev = prev.next;
+			current = current.next;
+		}
+		
 		return false;
 	}
 
@@ -116,6 +140,9 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		list2.insert("z");
 		list2.insert("f");
 		list2.insert("b");
+		System.out.println(list2);
+		
+		list2.delete(x -> x.contains("f"));
 		System.out.println(list2);
 	}
 
