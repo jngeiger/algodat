@@ -91,13 +91,11 @@ public String toString() {
 public String toStringReverse()
 {
 	Node current = tail;
-	int counter = 0;
 	String str = "";
 	while (current != null)
 	{
 		str += current.data;
 		current = current.prev;
-		counter++;
 		if (current != null)
 		{
 			str += " ";
