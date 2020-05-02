@@ -39,7 +39,7 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		current.next = temp;
 	}
 		
-	//This returns 'true' if the first element is bigger or equal to the last
+	//This returns 'true' if the first element is bigger or equal to the second
 	private boolean _isGreater(T element1, T element2)
 	{
 		if(element1.compareTo(element2) <= 0 )
