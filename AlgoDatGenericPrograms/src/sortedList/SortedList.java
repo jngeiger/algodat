@@ -2,143 +2,122 @@ package sortedList;
 
 import java.util.function.Function;
 
-public class SortedList<T extends Comparable<T>> extends OurList<T> {
-private Node head = null;
-private Node tail = null;
-	
+
+public class SortedList<T extends Comparable<T>> extends OurList<T> 
+{
+	private Node head = null;
 
 	@Override
-	public void insert(T ele) {
-		// TODO Auto-generated method stub
-		// list is empty
+	public void insert(T ele) 
+	{
+		
 		if (head == null)
 		{
 			head = new Node(ele);
+			return;
 		}
-		
-		else
-		{
-			Node current = head;
-			Node element = new Node(ele);
-			
-			if (element.data.compareTo(current.data) > 0)
-			{
-				Node temp = current;
-				head = element;
-				element.next = temp;
-				return;
-			}
-			
-			while ((current.next != null) && element.data.compareTo(current.next.data) < 0)
-			{
-				current = current.next;
-			}
-			Node temp = current.next;
-			current.next = element;
-			element.next = temp;
-			
-			
-			
-			
-		}
-		
-	}
 
-	@Override
-	public void insert(T ele, int pos) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public boolean sorted()
-	{
-		Node current = head;
-		boolean sorted = true;
-		while (current.next != null)
+		if(!_isGreater(head.element, ele))
 		{
-			if (current.data.compareTo(current.next.data) > 0 )
-			{
-				sorted = false;
-			}	
+			Node temp2 = new Node(ele);
+			temp2.next = head;
+			head = temp2;
+			return;
+		}
+		Node current = head;
+		
+		while (current.next != null && _isGreater(current.next.element, ele))
+		{
 			current = current.next;
 		}
-		return sorted;
+		Node temp = new Node(ele);
+		temp.next = current.next;
+		current.next = temp;
+	}
+		
+	
+	private boolean _isGreater(T element1, T element2)
+	{
+		if(element1.compareTo(element2) < 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 	
-	public void sortList()
+	@Override
+	public void insert(T ele, int pos) 
 	{
-		boolean mark = false;
-		Node current = head;
-		
-		
-		while (mark == false)
-		{
-			mark = true;
-			current = head;
-			while (current.next != null)
-			{
-				if (current.data.compareTo(current.next.data) < 0 )
-				{
-					mark = false;
-					Node temp = current;
-					Node temp2 = current.next;
-					temp.next = current.next.next;
-					temp2.next = temp;
-					current = temp2;
-					
-				}
-				
-				current = current.next;
-				
-			}
-			
-		}
+		insert(ele);	
 	}
 
 	@Override
-	public boolean delete(Function<T, Boolean> func) {
-		// TODO Auto-generated method stub
+	public boolean delete(Function<T, Boolean> func) 
+	{
+	
 		return false;
 	}
 
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		String retStr = "";
-		Node current = head;
-		while (current != null)
+	public String toString() 
+	{
+		String str = "";
+		Node temp = head;
+		while(temp != null)
 		{
-			retStr += current.data;
-			current = current.next;
-			if (current != null)
-			{
-				retStr += " ";
-			}
+			str += temp.element+"\n";
+			temp = temp.next;
 		}
-		return retStr;
-		
+		return str;
 	}
 	
-	private class Node {
-	    private Node next;
-	    private T data;
-	    
-	    Node (T data) {
-		      this.data = data;
-		      this.next = null;
-		    }
+	class Node 
+	{
+		private Node next = null;
+		private T element;
+		public Node(T object)
+		{
+			
+			this.element = object;
+			this.next = null;
+		}
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		SortedList<String> s1 = new SortedList<String>();
-		s1.insert("M");
-		s1.insert("X");
-		s1.insert("F");
-		s1.insert("C");
-		s1.insert("A");
-		//s1.insert("C");
+	public static void main (String [] args)
+	{
+		SortedList<String> list2 = new SortedList<String>();
+//		
+//		
+//		list2.insert("k");
+//		list2.insert("b");
+//		list2.insert("z");
+//		list2.insert("x");
+//		list2.insert("m");
+//		list2.insert("r");
+//		list2.insert("y");
+//		list2.insert("s");
+//		list2.insert("t");
+//		list2.insert("a");
 		
-		System.out.println(s1);
+		
+		System.out.println(list2.toString());
+		
+		SortedList<String> list3 = new SortedList<String>();
+		
+		list3.insert("c");
+		list3.insert("b");
+		list3.insert("a");
+		
+		System.out.println(list3.toString());
+		
+		list2.insert("z");
+		list2.insert("f");
+		list2.insert("b");
+		System.out.println(list2);
 	}
+
+
 }
