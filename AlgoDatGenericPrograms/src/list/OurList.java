@@ -48,6 +48,17 @@ public static void main(String[] args)
 		System.out.println(l2 + "\n");
 		System.out.println(l2.toStringReverse() + "\n");
 		
+		List<String> l3 = new List<String>();
+		l3.insert("Hello");
+		l3.insert("World");
+		l3.insert("Test");
+		l3.insert("bla");
+		l3.insert("blub234234");
+		
+		l3.insert("listentest",90);
+		System.out.println(l3);
+		
+		
 		
 }
 }

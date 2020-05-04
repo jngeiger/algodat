@@ -2,143 +2,168 @@ package sortedList;
 
 import java.util.function.Function;
 
-public class SortedList<T extends Comparable<T>> extends OurList<T> {
-private Node head = null;
-private Node tail = null;
-	
+
+
+public class SortedList<T extends Comparable<T>> extends OurList<T> 
+{
+	private Node head = null;
 
 	@Override
-	public void insert(T ele) {
-		// TODO Auto-generated method stub
-		// list is empty
+	public void insert(T ele) 
+	{
+		// Base case, if LL is empty
 		if (head == null)
 		{
 			head = new Node(ele);
+			return;
 		}
 		
-		else
+		// This case is called if the given element is greater than the first element in the list => the element will be the new head. Similar to the basic LL implementation
+		if(!_isGreater(head.element, ele))
 		{
-			Node current = head;
-			Node element = new Node(ele);
-			
-			if (element.data.compareTo(current.data) > 0)
-			{
-				Node temp = current;
-				head = element;
-				element.next = temp;
-				return;
-			}
-			
-			while ((current.next != null) && element.data.compareTo(current.next.data) < 0)
-			{
-				current = current.next;
-			}
-			Node temp = current.next;
-			current.next = element;
-			element.next = temp;
-			
-			
-			
-			
+			Node temp2 = new Node(ele);
+			temp2.next = head;
+			head = temp2;
+			return;
 		}
 		
-	}
-
-	@Override
-	public void insert(T ele, int pos) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public boolean sorted()
-	{
+		// This is called if neither the base case nor the second case if given. The LL will be iterated until the next element in the list is greater than the given one.
+		// OR the end of the LL is reached. Starting from line 37 the insertion process is started.
 		Node current = head;
-		boolean sorted = true;
-		while (current.next != null)
+		while (current.next != null && _isGreater(current.next.element, ele))
 		{
-			if (current.data.compareTo(current.next.data) > 0 )
-			{
-				sorted = false;
-			}	
 			current = current.next;
 		}
-		return sorted;
+		Node temp = new Node(ele);
+		temp.next = current.next;
+		current.next = temp;
+	}
+		
+	//This returns 'true' if the first element is bigger or equal to the second
+	private boolean _isGreater(T element1, T element2)
+	{
+		if(element1.compareTo(element2) <= 0 )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
-	public void sortList()
+	@Override
+	public void insert(T ele, int pos) 
 	{
-		boolean mark = false;
-		Node current = head;
-		
-		
-		while (mark == false)
-		{
-			mark = true;
-			current = head;
-			while (current.next != null)
-			{
-				if (current.data.compareTo(current.next.data) < 0 )
-				{
-					mark = false;
-					Node temp = current;
-					Node temp2 = current.next;
-					temp.next = current.next.next;
-					temp2.next = temp;
-					current = temp2;
-					
-				}
-				
-				current = current.next;
-				
-			}
-			
-		}
+		insert(ele);	
 	}
 
 	@Override
-	public boolean delete(Function<T, Boolean> func) {
-		// TODO Auto-generated method stub
+	public boolean delete(Function<T, Boolean> func) 
+	{
+		Node current = head;
+		// Test whether first node has to be deleted
+		if (func.apply(current.element))
+		{
+			head = current.next;
+			return true;
+		}
+		
+		// Check rest of list
+		Node prev = current;
+		current = current.next;
+		while (current != null)
+		{
+			if (func.apply(current.element))
+			{
+				// node to be deleted has been found
+				prev.next = current.next;
+				return true;
+			}
+			// Update of current and previous
+			prev = prev.next;
+			current = current.next;
+		}
+		
 		return false;
 	}
 
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		String retStr = "";
-		Node current = head;
-		while (current != null)
+	public String toString() 
+	{
+		String str = "";
+		Node temp = head;
+		while(temp != null)
 		{
-			retStr += current.data;
-			current = current.next;
-			if (current != null)
-			{
-				retStr += " ";
-			}
+			str += temp.element+"\n";
+			temp = temp.next;
 		}
-		return retStr;
-		
+		return str;
 	}
 	
-	private class Node {
-	    private Node next;
-	    private T data;
-	    
-	    Node (T data) {
-		      this.data = data;
-		      this.next = null;
-		    }
+	class Node 
+	{
+		private Node next = null;
+		private T element;
+		public Node(T object)
+		{
+			
+			this.element = object;
+			this.next = null;
+		}
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		SortedList<String> s1 = new SortedList<String>();
-		s1.insert("M");
-		s1.insert("X");
-		s1.insert("F");
-		s1.insert("C");
-		s1.insert("A");
-		//s1.insert("C");
+	public static void main (String [] args)
+	{
+		SortedList<String> list2 = new SortedList<String>();
+//		
+//		
+//		list2.insert("k");
+//		list2.insert("b");
+//		list2.insert("z");
+//		list2.insert("x");
+//		list2.insert("m");
+//		list2.insert("r");
+//		list2.insert("y");
+//		list2.insert("s");
+//		list2.insert("t");
+//		list2.insert("a");
 		
-		System.out.println(s1);
+		
+//		System.out.println(list2.toString());
+		
+		SortedList<String> list3 = new SortedList<String>();
+		SortedList<Integer> listInt = new SortedList<Integer>();
+		
+		for (int i = 0; i < 100; i++)
+		{
+			listInt.insert(((int)(Math.random() * 100)));
+		}
+		System.out.println(listInt);
+		
+//		list3.insert("c");
+//		list3.insert("b");
+//		list3.insert("a");
+	
+		list3.insert("z");
+		list3.insert("x");
+		list3.insert("k");
+		list3.insert("m");
+		list3.insert("b");
+		list3.insert("a");
+		
+		
+		
+		System.out.println(list3.toString());
+		
+//		list2.insert("z");
+//		list2.insert("f");
+//		list2.insert("b");
+//		System.out.println(list2);
+//		
+//		list2.delete(x -> x.contains("f"));
+//		System.out.println(list2);
 	}
+
+
 }

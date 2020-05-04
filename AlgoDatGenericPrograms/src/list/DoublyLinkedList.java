@@ -91,20 +91,18 @@ public String toString() {
 public String toStringReverse()
 {
 	Node current = tail;
-	int counter = 0;
 	String str = "";
 	while (current != null)
 	{
 		str += current.data;
 		current = current.prev;
-		counter++;
 		if (current != null)
 		{
 			str += " ";
 		}
 	}
 
-	return str + ("\n DEBUG: END OF LL AFTER" + counter + " ELEMENTS REACHED");
+	return str;
 }
 
 private class Node {
