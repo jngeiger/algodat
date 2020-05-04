@@ -21,16 +21,14 @@ public T search(T value) throws Exception
 public T recursion(T value, List<T> list) throws Exception
 {
 	counter++;
-	if (list.size() == 1)
+	if (list.size() == 1 && !(value.compareTo(list.get(0)) == 0))
 	{
-		if (value.compareTo(list.get(0)) == 0)
-		{
-			return (list.get(0));
-		}
-		else
-		{
 			throw new Exception("Not in List");
-		}
+	}
+	
+	if (value.compareTo(list.get(0)) == 0)
+	{
+		return (list.get(0));
 	}
 	if (value.compareTo(list.get(list.size() / 2 - 1)) < 0)
 	{
@@ -44,6 +42,7 @@ public T recursion(T value, List<T> list) throws Exception
 
 
 
+
 public String toString()
 {
 	return sortedList.toString();
@@ -53,21 +52,20 @@ public String toString()
 public static void main(String[] args) throws Exception
 {
 	var list = new ArrayList<Integer>();
-//	for(int i = 0; i < 2000; i++)
+//	for (int i = 0; i < 100; i++)
 //	{
-//		list.add(Integer.valueOf((int) (Math.random() * 100)+1));
+//		list.add(Integer.valueOf((int) (Math.random() * 10)+1));
 //	}
 	list.add(1);
 	list.add(2);
 	list.add(3);
 	list.add(4);
 	list.add(5);
-	list.add(42);	
+	list.add(42);
 	list.add(6);
 	list.add(41);
 	list.add(38);
 	list.add(22);
-	list.add(7);
 	list.add(8);
 	
 	RecursiveBinarySearch<Integer> search = new RecursiveBinarySearch<Integer>(list);
