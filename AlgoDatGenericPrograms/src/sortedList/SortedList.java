@@ -19,7 +19,7 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		}
 		
 		// This case is called if the given element is greater than the first element in the list => the element will be the new head. Similar to the basic LL implementation
-		if(_isGreater(head.element, ele))
+		if(!_isGreater(head.element, ele))
 		{
 			Node temp2 = new Node(ele);
 			temp2.next = head;
@@ -30,7 +30,7 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		// This is called if neither the base case nor the second case if given. The LL will be iterated until the next element in the list is greater than the given one.
 		// OR the end of the LL is reached. Starting from line 37 the insertion process is started.
 		Node current = head;
-		while (current.next != null && !_isGreater(current.next.element, ele))
+		while (current.next != null && _isGreater(current.next.element, ele))
 		{
 			current = current.next;
 		}
@@ -44,11 +44,11 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 	{
 		if(element1.compareTo(element2) <= 0 )
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 	
