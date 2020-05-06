@@ -113,7 +113,7 @@ public class SortingAlgorithmClass {
     private void bubbleRec(int index1, int index2)
     {
     
-    		// Overflow detection -> Start from beginning if end of array is reached
+    		// Overflow detection -> Start from beginning if end of array is reached  and recursively check whether the array is now sorted 
     		if (index2 == array.length)
     		{	
     			if (recIsSorted(0, 1))
