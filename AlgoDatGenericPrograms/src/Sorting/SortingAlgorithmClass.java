@@ -193,12 +193,9 @@ public class SortingAlgorithmClass {
     public static void main(String args[])
     {
         SortingAlgorithmClass s = new SortingAlgorithmClass(600);
-        SortingAlgorithmClass sFake = new SortingAlgorithmClass(30);
+       
         
-//        sFake.shuffle(true);
-//        sFake.dump(60);
-//        sFake.bubbleSortRec();
-//        sFake.dump(60);
+
         s.shuffle(true);
         s.dump(60);
         s.bubbleSortRec();
