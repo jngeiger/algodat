@@ -3,6 +3,7 @@ package Sorting;
 import java.util.Random;
 
 public class SortingAlgorithmClass {
+	static int x;
     public int array[]; // Fuer Debugging
     
     SortingAlgorithmClass()
@@ -112,32 +113,37 @@ public class SortingAlgorithmClass {
     
     private void bubbleRec(int index1, int index2)
     {
-    	if (!recIsSorted(array.length-2, array.length-1))
+    	System.out.println(x++);
     	{
-    		// Overflow detection -> Start from beginning if end of array is reached
+//    		Overflow detection -> Start from beginning if end of array is reached
     		if (index2 == array.length)
-    		{
+    		{	
+    			if (recIsSorted(0, 1))
+    			{
+    				return;
+    			}
+    			else {
     			index1 = 0;
     			index2 = 1;
+    			}
     		}
     		swapIfNeeded(index1,index2);
     		bubbleRec(++index1,++index2);
+    		
     	}
     }
    
-    
+    // Checks if the given array is sorted by recursively calling itself
     private boolean recIsSorted(int index1,int index2)
     {
-    	if (index1 == 0)
+    	
+    	System.out.println(x++);
+    	if (index2 == array.length-1)
     	{
     		if (array[index1] < array[index2])
-    		{
     			return true;
-    		}
     		else
-    		{
     			return false;
-    		}
     	}
     	else
     	{
@@ -146,10 +152,9 @@ public class SortingAlgorithmClass {
     			return false;
     		}
     		else {
-    			return recIsSorted(index1-1,index2-1);	
+    			return recIsSorted(index1+1,index2+1);	
     		}
     	}
-    	
     }
     
     private void swapIfNeeded(int index1, int index2)
@@ -192,7 +197,7 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[])
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(600);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(100);
        
         
 
@@ -201,6 +206,8 @@ public class SortingAlgorithmClass {
         s.bubbleSortRec();
         System.err.println("SPACER");
         s.dump(60);
+        System.out.println(s.isSorted());
+        System.out.println(x);
         
        
   
