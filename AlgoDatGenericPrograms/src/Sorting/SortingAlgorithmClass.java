@@ -87,6 +87,82 @@ public class SortingAlgorithmClass {
     	}
     }
     
+    public void bubbleSort()
+    {
+    	boolean check = true;
+    	do {
+    		check = true;
+    		for (int i = 0; i < array.length - 1; i++)
+    		{
+    			if (array[i] > array[i+1])
+    			{
+    				int temp = array[i];
+    				array[i] = array[i+1];
+    				array[i+1] = temp;
+    				check = false;
+    			}
+    		}
+    	} while(check == false);
+    }
+    
+    public void bubbleSortRec()
+    {
+    	bubbleRec(0,1);
+    }
+    
+    private void bubbleRec(int index1, int index2)
+    {
+    	if (!recIsSorted(array.length-2, array.length-1))
+    	{
+    		// Overflow detection -> Start from beginning if end of array is reached
+    		if (index2 == array.length)
+    		{
+    			index1 = 0;
+    			index2 = 1;
+    		}
+    		swapIfNeeded(index1,index2);
+    		bubbleRec(++index1,++index2);
+    	}
+    }
+   
+    
+    private boolean recIsSorted(int index1,int index2)
+    {
+    	if (index1 == 0)
+    	{
+    		if (array[index1] < array[index2])
+    		{
+    			return true;
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    	}
+    	else
+    	{
+    		if (array[index1] > array[index2])
+    		{
+    			return false;
+    		}
+    		else {
+    			return recIsSorted(index1-1,index2-1);	
+    		}
+    	}
+    	
+    }
+    
+    private void swapIfNeeded(int index1, int index2)
+    {
+    	if (array[index1] > array[index2])
+		{
+			int temp = array[index1];
+			array[index1] = array[index2];
+			array[index2] = temp;
+		}
+	}
+    
+    
     public int[] dropSort()
     {
     	int[] newArray = new int[array.length];
@@ -116,16 +192,19 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[])
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(30);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(600);
+        SortingAlgorithmClass sFake = new SortingAlgorithmClass(30);
         
+//        sFake.shuffle(true);
+//        sFake.dump(60);
+//        sFake.bubbleSortRec();
+//        sFake.dump(60);
         s.shuffle(true);
         s.dump(60);
-        int[] array = s.dropSort();
-        System.out.println("SPACE");
-        for (int i = 0; i < array.length; i++)
-        {
-        	System.out.println(array[i]);
-        }
+        s.bubbleSortRec();
+        System.err.println("SPACER");
+        s.dump(60);
+        
        
   
     }
