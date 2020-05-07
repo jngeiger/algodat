@@ -1,5 +1,6 @@
 package sortedList;
 
+
 import java.util.function.Function;
 
 
@@ -7,50 +8,53 @@ import java.util.function.Function;
 public class SortedList<T extends Comparable<T>> extends OurList<T> 
 {
 	private Node head = null;
-
+	private Node current = null;
+	
+	public void insert(T ele, Function<T,Boolean> func) 
+	{
+		// Base case, if LL is empty
+		current = head;
+				if (head == null)
+				{
+					head = new Node(ele);
+					return;
+				}
+				
+				// This case is called if the given element is greater than the first element in the list => the element will be the new head. Similar to the basic LL implementation
+				if(!func.apply(ele))
+				{
+					Node temp2 = new Node(head.element);
+					temp2.next = head;
+					head = temp2;
+					return;
+				}
+				
+				// This is called if neither the base case nor the second case if given. The LL will be iterated until the next element in the list is greater than the given one.
+				// OR the end of the LL is reached. Starting from line 37 the insertion process is started.
+				current = head;
+				while (current.next != null && func.apply(current.next.element))
+				{
+					current = current.next;
+				}
+				Node temp = new Node(ele);
+				temp.next = current.next;
+				current.next = temp;
+	}
+	
+	
 	@Override
 	public void insert(T ele) 
 	{
-		// Base case, if LL is empty
+		Node givenElement = new Node(ele);
+		 //Base case, if LL is empty
 		if (head == null)
 		{
 			head = new Node(ele);
 			return;
 		}
-		
-		// This case is called if the given element is greater than the first element in the list => the element will be the new head. Similar to the basic LL implementation
-		if(!_isGreater(head.element, ele))
-		{
-			Node temp2 = new Node(ele);
-			temp2.next = head;
-			head = temp2;
-			return;
-		}
-		
-		// This is called if neither the base case nor the second case if given. The LL will be iterated until the next element in the list is greater than the given one.
-		// OR the end of the LL is reached. Starting from line 37 the insertion process is started.
-		Node current = head;
-		while (current.next != null && _isGreater(current.next.element, ele))
-		{
-			current = current.next;
-		}
-		Node temp = new Node(ele);
-		temp.next = current.next;
-		current.next = temp;
+		insert(ele, x -> givenElement.element.compareTo(x) <= 0);
 	}
-		
-	//This returns 'true' if the first element is bigger or equal to the second
-	private boolean _isGreater(T element1, T element2)
-	{
-		if(element1.compareTo(element2) <= 0 )
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+	
 	
 	@Override
 	public void insert(T ele, int pos) 
@@ -135,6 +139,9 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		SortedList<String> list3 = new SortedList<String>();
 		SortedList<Integer> listInt = new SortedList<Integer>();
 		
+		
+		
+		
 		for (int i = 0; i < 100; i++)
 		{
 			listInt.insert(((int)(Math.random() * 100)));
@@ -154,6 +161,7 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		
 		
 		
+		
 		System.out.println(list3.toString());
 		
 //		list2.insert("z");
@@ -164,6 +172,8 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 //		list2.delete(x -> x.contains("f"));
 //		System.out.println(list2);
 	}
+
+	
 
 
 }

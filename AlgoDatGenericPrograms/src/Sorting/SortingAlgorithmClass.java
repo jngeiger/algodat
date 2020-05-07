@@ -191,11 +191,13 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[])
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(90);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(60);
+        s.decending();
+        
        
         
 
-        s.shuffle(true);
+        //s.shuffle(true);
         s.dump(60);
         System.out.println("SPACER");
         s.bubbleSortRec();
