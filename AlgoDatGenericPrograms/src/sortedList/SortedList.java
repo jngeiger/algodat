@@ -8,51 +8,48 @@ import java.util.function.Function;
 public class SortedList<T extends Comparable<T>> extends OurList<T> 
 {
 	private Node head = null;
-	private Node current = null;
+	
 	
 	public void insert(T ele, Function<T,Boolean> func) 
 	{
 		// Base case, if LL is empty
-		current = head;
-				if (head == null)
-				{
-					head = new Node(ele);
-					return;
-				}
-				
-				// This case is called if the given element is greater than the first element in the list => the element will be the new head. Similar to the basic LL implementation
-				if(!func.apply(ele))
-				{
-					Node temp2 = new Node(head.element);
-					temp2.next = head;
-					head = temp2;
-					return;
-				}
-				
-				// This is called if neither the base case nor the second case if given. The LL will be iterated until the next element in the list is greater than the given one.
-				// OR the end of the LL is reached. Starting from line 37 the insertion process is started.
-				current = head;
-				while (current.next != null && func.apply(current.next.element))
-				{
-					current = current.next;
-				}
-				Node temp = new Node(ele);
-				temp.next = current.next;
-				current.next = temp;
+		if (head == null)
+		{
+			head = new Node(ele);
+			return;
+		}
+		
+		// This case is called if the given element is greater than the first element in the list => the element will be the new head. Similar to the basic LL implementation
+		if(!func.apply(head.element))
+		{
+			Node temp2 = new Node(ele);
+			temp2.next = head;
+			head = temp2;
+			return;
+		}
+		
+		// This is called if neither the base case nor the second case if given. The LL will be iterated until the next element in the list is greater than the given one.
+		// OR the end of the LL is reached. Starting from line 37 the insertion process is started.
+		Node current = head;
+		while (current.next != null && func.apply(current.next.element))
+		{
+			current = current.next;
+		}
+		Node temp = new Node(ele);
+		temp.next = current.next;
+		current.next = temp;
 	}
-	
-	
+		
 	@Override
 	public void insert(T ele) 
 	{
-		Node givenElement = new Node(ele);
 		 //Base case, if LL is empty
 		if (head == null)
 		{
 			head = new Node(ele);
 			return;
 		}
-		insert(ele, x -> givenElement.element.compareTo(x) <= 0);
+		insert(ele, x -> x.compareTo(new Node(ele).element) <= 0);
 	}
 	
 	
@@ -144,8 +141,11 @@ public class SortedList<T extends Comparable<T>> extends OurList<T>
 		
 		for (int i = 0; i < 100; i++)
 		{
-			listInt.insert(((int)(Math.random() * 100)));
+			int x = ((int)(Math.random() * 100));
+			System.out.print(x + " ");
+			listInt.insert(x);
 		}
+		System.out.println();
 		System.out.println(listInt);
 		
 //		list3.insert("c");
