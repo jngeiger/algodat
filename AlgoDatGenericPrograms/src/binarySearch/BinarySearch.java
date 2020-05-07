@@ -1,38 +1,41 @@
 package binarySearch;
 
+import java.util.ArrayList;
+
 public class BinarySearch {
 
-public static void main(String[] args)
-{
-	int[] array = new int[] {1,51,61,80,91,104,201,301,401,910,1001};
-	System.out.println(binarySearch(array,1));
-	int sum = 0;
-	int n = 1024;
-    for (int i = 1; i <= 4*n*n; i = i*3)
-        sum++;
-	System.out.println(sum);
-	
-}
-
-public static int binarySearch(int[] array, int key)
-{
-	int lo = 0; int hi = array.length - 1;
-	while (lo <= hi)
-	{
-		int mid = lo + (hi - lo) / 2;
-		if (key < array[mid])
-		{
-			hi = mid - 1;
-		}
-		else if (key > array[mid])
-		{
-			lo = mid + 1;
-		}
-		else
-		{
-			return mid;
-		}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(1);
+		list.add(42);
+		list.add(456);
+		list.add(4124);
+		list.add(133799);
+		list.add(213123312);
+		
+		System.out.println(binarySearch(list,457));
 	}
-	return -1;
-}
+	
+	public static boolean binarySearch(ArrayList<Integer> list, int x)
+	{
+		int first = 0;
+		int last = (list.size() - 1);
+		
+		while (first <= last)
+		{
+			int mid = (first + last) / 2;
+			if (list.get(mid) == x)
+				return true;
+			if (list.get(mid) > x)
+			{
+				last = mid-1;
+			}
+			if (list.get(mid) < x)
+			{
+				first = mid+1;
+			}
+		}
+		return false;
+	}
 }
