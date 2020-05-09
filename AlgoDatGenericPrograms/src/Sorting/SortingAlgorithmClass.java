@@ -191,8 +191,8 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[])
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(60);
-        s.decending();
+        SortingAlgorithmClass s = new SortingAlgorithmClass(120);
+        s.shuffle(true);
         
        
         
