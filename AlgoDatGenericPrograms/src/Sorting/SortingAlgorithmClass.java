@@ -43,39 +43,40 @@ public class SortingAlgorithmClass {
     }
     public void mergeSort(int[] unsortedArray, int l, int r)
     {
-    	if (r-l <= 1)
+    	if (l > r)
     	{
     		return;
     	}
-    	int m = (l+r) / 2;
-    	mergeSort(unsortedArray,l,m);
-    	mergeSort(unsortedArray,m,r);
-    	merge(unsortedArray,l,m,r);
+    	int m = (l+r)/2;
+    	mergeSort(array,l,m);
+    	mergeSort(array,m,r);
+    	merge(array,l,m,r);
     	
     }
     
     private void merge(int [] unsortedArray,int l, int m, int r)
     {
-    	int[] left = Arrays.copyOfRange(unsortedArray, l, m);
-    	int[] right = Arrays.copyOfRange(unsortedArray, m, r);
+    	int[] leftArray = Arrays.copyOfRange(unsortedArray, l, m);
+    	int[] rightArray = Arrays.copyOfRange(unsortedArray, m, r);
     	int leftIndex = 0;
     	int rightIndex = 0;
     	
     	for (int i = l; i < r; i++)
     	{
-    		boolean leftNext = leftIndex < left.length;
-    		boolean rightNext = rightIndex < right.length;
-    		boolean leftSmaller = leftNext && rightNext && left[leftIndex] <= right[rightIndex];
+    		boolean rightNext = r < rightArray.length;
+    		boolean leftNext = l < leftArray.length;
+    		boolean leftSmaller = leftNext && rightNext && leftArray[leftIndex] < rightArray[rightIndex];
     		
     		if (!rightNext || leftSmaller)
     		{
-    			unsortedArray[i] = left[leftIndex++];
+    			 unsortedArray[i] = leftArray[leftIndex++];
     		}
-    		else {
-    			unsortedArray[i] = right[rightIndex++];
+    		else
+    		{
+    			unsortedArray[i] = rightArray[rightIndex++];
     		}
-    		
     	}
+    	
     }
    
     public void slowSort()
