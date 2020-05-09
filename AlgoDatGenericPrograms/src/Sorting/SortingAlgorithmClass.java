@@ -1,5 +1,7 @@
 package Sorting;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class SortingAlgorithmClass {
@@ -35,7 +37,76 @@ public class SortingAlgorithmClass {
         for (int i=0; i<array.length; i++)
             array[i] = array.length-i-1;
     }
+    public void mergeSortMain()
+    {
+    	mergeSort(array,0,array.length);
+    }
+    public void mergeSort(int[] unsortedArray, int l, int r)
+    {
+    	int remainingLength = r-l;
+    	if (remainingLength <= 1) {
+    		return;
+    	}
+    	
+    	else
+    	{
+    	int m = (l+r)/2;
+    	mergeSort(unsortedArray,l,m);
+    	mergeSort(unsortedArray,m,r);
+    	merge(unsortedArray,l,m,r);
+    	}
+    }
+    
+    private void merge(int [] unsortedArray,int l, int m, int r)
+    {
+    	int[] left = Arrays.copyOfRange(unsortedArray,l,m);
+    	int[] right = Arrays.copyOfRange(unsortedArray, m, r);
+    	int leftIndex = 0;
+    	int rightIndex = 0;
+    	for (int i = l; i < r; i++)
+    	{
+    		boolean moreLeft = leftIndex < left.length;
+    		boolean moreRight = rightIndex < right.length;
+    		boolean leftSmaller = moreLeft && moreRight && left[leftIndex] <= right[rightIndex];
+    		
+    		if (!moreRight || leftSmaller)
+    		{
+    			unsortedArray[i] = left[leftIndex++];
+    		}
+    		else
+    		{
+    			unsortedArray[i] = right[rightIndex++];
+    		}
+    		
+    	}
+    }
    
+    public void slowSort()
+    {
+    	recSlowSort(this.array,0,array.length-1);
+    }
+    
+    public void recSlowSort(int[] array, int i, int j)
+    {
+    	if (i >= j)
+    	{
+    		return;
+    	}
+    	int m = (i+j)/2;
+    	recSlowSort(array,i,m);
+    	recSlowSort(array,m+1,j);
+    	
+    	if (array[m] > array[j])
+    	{
+    		int temp = array[m];
+    		array[m] = array[j];
+    		array[j] = temp;
+    	}
+    	
+    	recSlowSort(array,i,j-1);
+    	
+    }
+    
     public void shuffle(boolean random)
     {
         Random dice;
@@ -191,19 +262,17 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[])
     {
+
         SortingAlgorithmClass s = new SortingAlgorithmClass(120);
         s.shuffle(true);
-        
-       
-        
 
-        //s.shuffle(true);
-        s.dump(60);
-        System.out.println("SPACER");
-        s.bubbleSortRec();
-        System.out.println("SPACER");
-        s.dump(60);
+
+        
+        s.shuffle(true);
+        //s.dump(60);
+        s.mergeSortMain();
         System.out.println(s.isSorted());
+       // s.dump(60);
         
        
   
