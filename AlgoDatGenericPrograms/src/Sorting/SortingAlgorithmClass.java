@@ -260,12 +260,12 @@ public class SortingAlgorithmClass {
     public static void main(String args[])
     {
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(120);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(8);
         s.shuffle(true);
-        
-        //s.dump(60);
-        s.mergeSortMain();
-        s.dump(60);
+        s.recSlowSort(s.array, 0, s.array.length-1);
+//        s.dump(60);
+//        s.mergeSortMain();
+//        s.dump(60);
         System.out.println(s.isSorted());
        // s.dump(60);
         
