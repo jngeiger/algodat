@@ -43,38 +43,35 @@ public class SortingAlgorithmClass {
     }
     public void mergeSort(int[] unsortedArray, int l, int r)
     {
-    	int remainingLength = r-l;
-    	if (remainingLength <= 1) {
+    	if (r-l <= 1)
+    	{
     		return;
     	}
-    	
-    	else
-    	{
-    	int m = (l+r)/2;
+    	int m = (l+r) / 2;
     	mergeSort(unsortedArray,l,m);
     	mergeSort(unsortedArray,m,r);
     	merge(unsortedArray,l,m,r);
-    	}
+    	
     }
     
     private void merge(int [] unsortedArray,int l, int m, int r)
     {
-    	int[] left = Arrays.copyOfRange(unsortedArray,l,m);
+    	int[] left = Arrays.copyOfRange(unsortedArray, l, m);
     	int[] right = Arrays.copyOfRange(unsortedArray, m, r);
     	int leftIndex = 0;
     	int rightIndex = 0;
+    	
     	for (int i = l; i < r; i++)
     	{
-    		boolean moreLeft = leftIndex < left.length;
-    		boolean moreRight = rightIndex < right.length;
-    		boolean leftSmaller = moreLeft && moreRight && left[leftIndex] <= right[rightIndex];
+    		boolean leftNext = leftIndex < left.length;
+    		boolean rightNext = rightIndex < right.length;
+    		boolean leftSmaller = leftNext && rightNext && left[leftIndex] <= right[rightIndex];
     		
-    		if (!moreRight || leftSmaller)
+    		if (!rightNext || leftSmaller)
     		{
     			unsortedArray[i] = left[leftIndex++];
     		}
-    		else
-    		{
+    		else {
     			unsortedArray[i] = right[rightIndex++];
     		}
     		
@@ -265,12 +262,10 @@ public class SortingAlgorithmClass {
 
         SortingAlgorithmClass s = new SortingAlgorithmClass(120);
         s.shuffle(true);
-
-
         
-        s.shuffle(true);
         //s.dump(60);
         s.mergeSortMain();
+        s.dump(60);
         System.out.println(s.isSorted());
        // s.dump(60);
         
