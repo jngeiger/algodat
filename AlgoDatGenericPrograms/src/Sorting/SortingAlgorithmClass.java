@@ -296,9 +296,9 @@ public class SortingAlgorithmClass {
     public static void main(String args[])
     {
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(600);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(8);
         s.shuffle(true);
-        s.quickSort(0,s.array.length-1);
+        s.mergeSortMain();
 //        s.recSlowSort(s.array, 0, s.array.length-1);
 //        s.dump(60);
 //        s.mergeSortMain();
