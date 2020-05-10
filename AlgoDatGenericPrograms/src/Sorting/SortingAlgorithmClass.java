@@ -43,7 +43,7 @@ public class SortingAlgorithmClass {
     }
     public void mergeSort(int[] unsortedArray, int l, int r)
     {
-    	if ((r-l) <= 1)
+    	if (r-l <= 1)
     	{
     		return;
     	}
@@ -56,24 +56,24 @@ public class SortingAlgorithmClass {
     
     private void merge(int [] unsortedArray,int l, int m, int r)
     {
-    	int[] leftArray = Arrays.copyOfRange(unsortedArray, l, m);
-    	int[] rightArray = Arrays.copyOfRange(unsortedArray, m, r);
+    	int[] left = Arrays.copyOfRange(unsortedArray,l,m);
+    	int[] right = Arrays.copyOfRange(unsortedArray,m,r);
     	int leftIndex = 0;
     	int rightIndex = 0;
     	
     	for (int i = l; i < r; i++)
     	{
-    		boolean rightNext = rightIndex < rightArray.length;
-    		boolean leftNext = leftIndex < leftArray.length;
-    		boolean leftSmaller = leftNext && rightNext && leftArray[leftIndex] <= rightArray[rightIndex];
+    		boolean leftMore = leftIndex < left.length;
+    		boolean rightMore = rightIndex < right.length;
+    		boolean leftSmaller = leftMore && rightMore && left[leftIndex] <= right[rightIndex];
     		
-    		if (!rightNext || leftSmaller)
+    		if (!rightMore || leftSmaller)
     		{
-    			 unsortedArray[i] = leftArray[leftIndex]; leftIndex++;
+    			unsortedArray[i] = left[leftIndex++]; 
     		}
     		else
     		{
-    			unsortedArray[i] = rightArray[rightIndex]; rightIndex++;
+    			unsortedArray[i] = right[rightIndex++];
     		}
     	}
     	
@@ -255,15 +255,50 @@ public class SortingAlgorithmClass {
     }
     
   
-        
-
+    public void quickSort(int l, int r)
+    {
+    	if (r-l <= 1)
+    	{
+    	return;
+    	}
+    	else {
+    	int partition = partition(l,r);
+    	quickSort(l,partition-1);
+    	quickSort(partition+1,r);
+    	}
+   }
+    
+    
+    public int partition(int l,int r)
+    {
+    	int pivot = array[r];
+    	int i = l-1;
+    	
+    	for (int j = l; j < r; j++)
+    	{
+    		if (array[j] <= pivot)
+    		{
+    			i++;
+    			swap(j,i);
+    		}
+    	}
+    	swap(r,i+1);
+    	return i+1;
+    }
+    
+    public void swap(int int1, int int2)
+    {
+    	int temp = array[int1];
+    	array[int1] = array[int2];
+    	array[int2] = temp;
+    }
      
     public static void main(String args[])
     {
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(8);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(600);
         s.shuffle(true);
-        s.mergeSortMain();
+        s.quickSort(0,s.array.length-1);
 //        s.recSlowSort(s.array, 0, s.array.length-1);
 //        s.dump(60);
 //        s.mergeSortMain();
