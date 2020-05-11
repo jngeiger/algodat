@@ -11,6 +11,7 @@ public abstract class OurList<T> {
 public static void main(String[] args)
 {
 		List<Integer> l = new List<Integer>();
+	
 		
 		l.insert(1);
 		l.insert(11);
@@ -33,6 +34,7 @@ public static void main(String[] args)
 		l2.insert(11);
 		l2.insert(111);
 		l2.insert(1111);
+	
 		
 		
 		System.out.println(l2 + "\n");
@@ -57,6 +59,7 @@ public static void main(String[] args)
 		
 		l3.insert("listentest",90);
 		System.out.println(l3);
+
 		
 		
 		
