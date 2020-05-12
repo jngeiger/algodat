@@ -2,6 +2,7 @@ package Sorting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class SortingAlgorithmClass {
@@ -232,32 +233,100 @@ public class SortingAlgorithmClass {
     
     public void selectionSort()
     {
-    	int index = array.length-1;
-    	while (index > 0)
+    	int index = array.length;
+    	for (int i = 0; i < array.length-1; i++)
     	{
-    		int highest = index;
-    		for (int i = 0; i < index; i++)
+    		int maxPos = 0;
+    		
+    		for (int j = 1; j < index; j++)
     		{
-    			if (array[i] > array[index])
+    			if (array[j] > array[maxPos])
     			{
-    				highest = i;
+    				maxPos = j;
     			}
     		}
-    		int temp = array[index];
-    		array[index] = array[highest];
-    		array[highest] = array[temp];
-			index--;
+    		index--;
+    		swapAtIndex(maxPos,index);
+    	}	
+    }
+    
+    public void shellSort() throws Exception
+    {
+    	if (array.length == 0)
+    	{
+    		throw new Exception("EMPTY ARRAY");
     	}
+    	List<Integer> list = getPrattSequence(array.length);
+        for (int i = list.size()-1; i >= 0; i--)
+        {
+        	insertionSort(list.get(i));
+        }
+    } 
+    
+    public List<Integer> getPrattSequence(int max_size)
+    {
+    	List<Integer> list = new ArrayList<Integer>();
+    	int temp = 0;
+    	for (int i = 0; i < max_size; i++)
+    	{
+    		if (Math.pow(2, i) > max_size)
+    		{
+    			break;
+    		}
+    		for (int j = 0; j < max_size; j++)
+    		{
+    			temp = ((int)Math.pow(2, i)) * ((int)Math.pow(3, j));
+    			if (temp > max_size)
+        		{
+        			break;
+        		}
+    			list.add(temp);
+    		}
+  
+    		
+    	}
+    	
+    	list.sort((x,y) ->x.compareTo(y));
+    	return list;
     }
     
     public void insertionSort()
     {
-    	for (int i = 0; i < array.length-1; i++)
+    	for (int i = 1; i < array.length; i++)
     	{
-    		
+    		int currentValue = array[i];
+    		int j = i;
+    		while (j >= 1 && array[j-1] > currentValue)
+    		{
+    			array[j] = array[j-1];
+    			j--;
+    		}
+    		array[j] = currentValue;
     	}
     }
     
+    private void insertionSort(int jump)
+    {
+    	for (int i=1; i<array.length; i+=1)
+        {
+            int currentValue = array[i];
+            int j=i;
+            while ((j>=jump) && (array[j-jump] > currentValue))
+            {
+                array[j] = array[j-jump];
+                j -= jump;
+            }
+            array[j] = currentValue;
+        }
+    	    
+    }
+    
+    private void swapAtIndex(int i, int j)
+	{
+		int zwsp = array[i];
+		array[i] = array[j];
+		array[j] = zwsp;
+	}
     
     public int[] dropSort()
     {
@@ -321,19 +390,19 @@ public class SortingAlgorithmClass {
     	array[int2] = temp;
     }
      
-    public static void main(String args[])
+    public static void main(String args[]) throws Exception
     {
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(8_0);
-        s.shuffle(true);
-        s.insertionSort();
+        SortingAlgorithmClass s = new SortingAlgorithmClass(8_000_000);
+       s.shuffle(true);
+       s.shellSort();
         //s.mergeSortMain();
 //        s.recSlowSort(s.array, 0, s.array.length-1);
 //        s.dump(60);
 //        s.mergeSortMain();
 //        s.dump(60);
         System.out.println(s.isSorted());
-        s.dump(60);
+//        s.dump(60);
        // s.dump(60);
         
        
