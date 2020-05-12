@@ -397,6 +397,7 @@ public class SortingAlgorithmClass {
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
+    
         
         s.shuffle(true);
         s1.array = Arrays.copyOfRange(s.array, 0, s.array.length);
