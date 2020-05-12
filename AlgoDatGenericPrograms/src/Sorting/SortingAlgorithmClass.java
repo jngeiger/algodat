@@ -230,6 +230,34 @@ public class SortingAlgorithmClass {
 		}
 	}
     
+    public void selectionSort()
+    {
+    	int index = array.length-1;
+    	while (index > 0)
+    	{
+    		int highest = index;
+    		for (int i = 0; i < index; i++)
+    		{
+    			if (array[i] > array[index])
+    			{
+    				highest = i;
+    			}
+    		}
+    		int temp = array[index];
+    		array[index] = array[highest];
+    		array[highest] = array[temp];
+			index--;
+    	}
+    }
+    
+    public void insertionSort()
+    {
+    	for (int i = 0; i < array.length-1; i++)
+    	{
+    		
+    	}
+    }
+    
     
     public int[] dropSort()
     {
@@ -296,9 +324,10 @@ public class SortingAlgorithmClass {
     public static void main(String args[])
     {
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(8);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(8_0);
         s.shuffle(true);
-        s.mergeSortMain();
+        s.insertionSort();
+        //s.mergeSortMain();
 //        s.recSlowSort(s.array, 0, s.array.length-1);
 //        s.dump(60);
 //        s.mergeSortMain();
