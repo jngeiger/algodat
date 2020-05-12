@@ -263,7 +263,7 @@ public class SortingAlgorithmClass {
         }
     } 
     
-    public List<Integer> getPrattSequence(int max_size)
+    private List<Integer> getPrattSequence(int max_size)
     {
     	List<Integer> list = new ArrayList<Integer>();
     	int temp = 0;
