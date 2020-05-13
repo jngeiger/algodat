@@ -32,130 +32,6 @@ public class SortingAlgorithmClass {
         for (int i=0; i<array.length; i++)
             array[i] = i;
     }
-
-    public void decending()
-    {
-        for (int i=0; i<array.length; i++)
-            array[i] = array.length-i-1;
-    }
-    public void mergeSortMain()
-    {
-    	mergeSort(array,0,array.length);
-    }
-    public void mergeSort(int[] unsortedArray, int l, int r)
-    {
-    	if (r-l <= 1)
-    	{
-    		return;
-    	}
-    	int m = (l+r)/2;
-    	mergeSort(unsortedArray,l,m);
-    	mergeSort(unsortedArray,m,r);
-    	merge(unsortedArray,l,m,r);
-    	
-    }
-    
-    private void merge(int [] unsortedArray,int l, int m, int r)
-    {
-    	int[] left = Arrays.copyOfRange(unsortedArray,l,m);
-    	int[] right = Arrays.copyOfRange(unsortedArray,m,r);
-    	int leftIndex = 0;
-    	int rightIndex = 0;
-    	
-    	for (int i = l; i < r; i++)
-    	{
-    		boolean leftMore = leftIndex < left.length;
-    		boolean rightMore = rightIndex < right.length;
-    		boolean leftSmaller = leftMore && rightMore && left[leftIndex] <= right[rightIndex];
-    		
-    		if (!rightMore || leftSmaller)
-    		{
-    			unsortedArray[i] = left[leftIndex++]; 
-    		}
-    		else
-    		{
-    			unsortedArray[i] = right[rightIndex++];
-    		}
-    	}
-    	
-    }
-   
-    public void slowSort()
-    {
-    	recSlowSort(this.array,0,array.length-1);
-    }
-    
-    public void recSlowSort(int[] array, int i, int j)
-    {
-    	if (i >= j)
-    	{
-    		return;
-    	}
-    	int m = (i+j)/2;
-    	recSlowSort(array,i,m);
-    	recSlowSort(array,m+1,j);
-    	
-    	if (array[m] > array[j])
-    	{
-    		int temp = array[m];
-    		array[m] = array[j];
-    		array[j] = temp;
-    	}
-    	
-    	recSlowSort(array,i,j-1);
-    	
-    }
-    
-    public void shuffle(boolean random)
-    {
-        Random dice;
-        
-        if (random)
-            dice = new Random((int)(Math.random() * 984648678) + 1);
-        
-        else
-            dice = new Random(42);
-
-        // Knuth Band 2
-        for (int i=0; i<array.length; i++)
-        {
-            int j = dice.nextInt(i+1);
-            int zwsp = array[i];
-            array[i] = array[j];
-            array[j] = zwsp;
-        }
-    }   
-    
-    public boolean isSorted()
-    {
-        for (int i=0; i<array.length-1; i++)
-            if (array[i] > array[i+1]) return false;
-        return true;
-    }
-    
-    public void dump(int lineLength)
-    {
-        int nrLength = (int)Math.log10(array.length)+2;
-        int maxPerLine = lineLength / nrLength;
-        String formatStr = "%" + nrLength + "d";
-        
-        for (int i=0; i<array.length; i++)
-        {
-            if ((i!=0) && (i%maxPerLine==0)) System.out.println();
-            System.out.printf(formatStr, array[i]);
-        }
-    }
-    
-    public void randomSort()
-    {
-    	int keepAlive = 1;
-    	while(!isSorted())
-    	{
-    		shuffle(true);
-    		keepAlive++;
-    		System.out.println(keepAlive);
-    	}
-    }
     
     public void bubbleSort()
     {
@@ -198,70 +74,50 @@ public class SortingAlgorithmClass {
     		swapIfNeeded(index1,index2);
     		bubbleRec(++index1,++index2);
     }
-   
-    // Checks if the given array is sorted by recursively calling itself
-    private boolean recIsSorted(int index1,int index2)
+
+    public void decending()
     {
-    	if (index2 == array.length-1)
-    	{
-    		if (array[index1] < array[index2])
-    			return true;
-    		else
-    			return false;
-    	}
-    	else
-    	{
-    		if (array[index1] > array[index2])
-    		{
-    			return false;
-    		}
-    		else {
-    			return recIsSorted(index1+1,index2+1);	
-    		}
-    	}
+        for (int i=0; i<array.length; i++)
+            array[i] = array.length-i-1;
     }
     
-    private void swapIfNeeded(int index1, int index2)
-    {
-    	if (array[index1] > array[index2])
-		{
-			int temp = array[index1];
-			array[index1] = array[index2];
-			array[index2] = temp;
-		}
-	}
     
-    public void selectionSort()
+    public int[] dropSort()
     {
-    	int index = array.length;
-    	for (int i = 0; i < array.length-1; i++)
+    	int[] newArray = new int[array.length];
+    	newArray[0] = array[0];
+    	int index2 = 1;
+    	
+    	for (int i = 1; i < array.length; i++)
     	{
-    		int maxPos = 0;
-    		
-    		for (int j = 1; j < index; j++)
+    		if (array[i] > newArray[index2-1])
     		{
-    			if (array[j] > array[maxPos])
-    			{
-    				maxPos = j;
-    			}
+    			newArray[index2++] = array[i];
+    			
     		}
-    		index--;
-    		swapAtIndex(maxPos,index);
-    	}	
+    	}
+    	
+    	int[] cleanedArray = new int[index2];
+    	for (int i = 0; i < cleanedArray.length; i++)
+    	{ 
+    		cleanedArray[i] = newArray[i];
+    	}
+    	return cleanedArray;
     }
     
-    public void shellSort() throws Exception
+    public void dump(int lineLength)
     {
-    	if (array.length == 0)
-    	{
-    		throw new Exception("EMPTY ARRAY");
-    	}
-    	List<Integer> list = getPrattSequence(array.length);
-        for (int i = list.size()-1; i >= 0; i--)
+        int nrLength = (int)Math.log10(array.length)+2;
+        int maxPerLine = lineLength / nrLength;
+        String formatStr = "%" + nrLength + "d";
+        
+        for (int i=0; i<array.length; i++)
         {
-        	insertionSort(list.get(i));
+            if ((i!=0) && (i%maxPerLine==0)) System.out.println();
+            System.out.printf(formatStr, array[i]);
         }
-    } 
+    }
+    
     
     private List<Integer> getPrattSequence(int max_size)
     {
@@ -288,6 +144,106 @@ public class SortingAlgorithmClass {
     	
     	list.sort((x,y) ->x.compareTo(y));
     	return list;
+    }
+    
+    
+    public void insertionSort()
+    {
+    	for (int i = 1; i < array.length; i++)
+    	{
+    		int currentValue = array[i];
+    		int j = i;
+    		while (j >= 1 && array[j-1] > currentValue)
+    		{
+    			array[j] = array[j-1];
+    			j--;
+    		}
+    		array[j] = currentValue;
+    	}
+    }
+    
+    private void insertionSort(int jump)
+    {
+    	for (int i=1; i<array.length; i+=1)
+        {
+            int currentValue = array[i];
+            int j=i;
+            while ((j>=jump) && (array[j-jump] > currentValue))
+            {
+                array[j] = array[j-jump];
+                j -= jump;
+            }
+            array[j] = currentValue;
+        }
+    	    
+    }
+    
+    
+    public boolean isSorted()
+    {
+        for (int i=0; i<array.length-1; i++)
+            if (array[i] > array[i+1]) return false;
+        return true;
+    }
+    
+    
+    public void mergeSortMain()
+    {
+    	mergeSort(array,0,array.length);
+    }
+    public void mergeSort(int[] unsortedArray, int l, int r)
+    {
+    	if (r-l <= 1)
+    	{
+    		return;
+    	}
+    	int m = (l+r)/2;
+    	mergeSort(unsortedArray,l,m);
+    	mergeSort(unsortedArray,m,r);
+    	merge(unsortedArray,l,m,r);
+    	
+    }
+    
+    private void merge(int [] unsortedArray,int l, int m, int r)
+    {
+    	int[] left = Arrays.copyOfRange(unsortedArray,l,m);
+    	int[] right = Arrays.copyOfRange(unsortedArray,m,r);
+    	int leftIndex = 0;
+    	int rightIndex = 0;
+    	
+    	for (int i = l; i < r; i++)
+    	{
+    		boolean leftMore = leftIndex < left.length;
+    		boolean rightMore = rightIndex < right.length;
+    		boolean leftSmaller = leftMore && rightMore && left[leftIndex] <= right[rightIndex];
+    		
+    		if (!rightMore || leftSmaller)
+    		{
+    			unsortedArray[i] = left[leftIndex++]; 
+    		}
+    		else
+    		{
+    			unsortedArray[i] = right[rightIndex++];
+    		}
+    	}
+    	
+    }
+    
+    public int partition(int l,int r)
+    {
+    	int pivot = array[r];
+    	int i = l-1;
+    	
+    	for (int j = l; j < r; j++)
+    	{
+    		if (array[j] <= pivot)
+    		{
+    			i++;
+    			swap(j,i);
+    		}
+    	}
+    	swap(r,i+1);
+    	return i+1;
     }
     
     public void quickSort()
@@ -352,116 +308,55 @@ public class SortingAlgorithmClass {
     		
     }
     
+    
+
     private void quickSortSelfRec(int[] myArray, int size)
     {
     	if (size < 2)
-    	{return;}
-    	
-    	int[] leftSide = new int[size-1];
-    	int[] rightSide = new int[size-1];
-    	int[] pivotElements = new int[size];
-    	int lCnt = 0;
-    	int pCnt = 0;
-    	int rCnt = 0;
+    		return;
+    	int[] leftArray = new int[size-1];
+    	int[] rightArray = new int[size-1];
+    	int[] pivotArray = new int[size];
+    	int leftcounter = 0;
+    	int rightcounter = 0;
+    	int pivotcounter = 0;
     	
     	int pivot = myArray[0];
     	for (int i = 0; i < size; i++)
     	{
     		if (myArray[i] < pivot)
     		{
-    			leftSide[lCnt++] = myArray[i];
+    			leftArray[leftcounter++] = myArray[i];
     		}
     		if (myArray[i] == pivot)
     		{
-    			pivotElements[pCnt++] = myArray[i];
+    			pivotArray[pivotcounter++] = myArray[i];
     		}
     		if (myArray[i] > pivot)
     		{
-    			rightSide[rCnt++] = myArray[i];
+    			rightArray[rightcounter++] = myArray[i];
     		}
     	}
+    	quickSortSelfRec(leftArray,leftcounter);
+    	quickSortSelfRec(rightArray,rightcounter);
     	
-    	quickSortSelfRec(leftSide,lCnt);
-    	quickSortSelfRec(rightSide,rCnt);
-    	
-    	int idx = 0;
-    	for (int i = 0; i < lCnt; i++)
+    	int index = 0;
+    	for (int i = 0; i < leftcounter; i++)
     	{
-    		myArray[idx] = leftSide[i]; idx++;
+    		myArray[index++] = leftArray[i]; 
     	}
-    	for (int i = 0; i < pCnt; i++)
+    	for (int i = 0; i < pivotcounter; i++)
     	{
-    		myArray[idx] = pivotElements[i]; idx++;
+    		myArray[index++] = pivotArray[i]; 
     	}
-    	for (int i = 0; i < rCnt; i++)
+    	for (int i = 0; i < rightcounter; i++)
     	{
-    		myArray[idx] = rightSide[i]; idx++;
-    	}
-    }
-    
-    
-    public void insertionSort()
-    {
-    	for (int i = 1; i < array.length; i++)
-    	{
-    		int currentValue = array[i];
-    		int j = i;
-    		while (j >= 1 && array[j-1] > currentValue)
-    		{
-    			array[j] = array[j-1];
-    			j--;
-    		}
-    		array[j] = currentValue;
-    	}
-    }
-    
-    private void insertionSort(int jump)
-    {
-    	for (int i=1; i<array.length; i+=1)
-        {
-            int currentValue = array[i];
-            int j=i;
-            while ((j>=jump) && (array[j-jump] > currentValue))
-            {
-                array[j] = array[j-jump];
-                j -= jump;
-            }
-            array[j] = currentValue;
-        }
-    	    
-    }
-    
-    private void swapAtIndex(int i, int j)
-	{
-		int zwsp = array[i];
-		array[i] = array[j];
-		array[j] = zwsp;
-	}
-    
-    public int[] dropSort()
-    {
-    	int[] newArray = new int[array.length];
-    	newArray[0] = array[0];
-    	int index2 = 1;
-    	
-    	for (int i = 1; i < array.length; i++)
-    	{
-    		if (array[i] > newArray[index2-1])
-    		{
-    			newArray[index2++] = array[i];
-    			
-    		}
+    		myArray[index++] = rightArray[i]; 
     	}
     	
-    	int[] cleanedArray = new int[index2];
-    	for (int i = 0; i < cleanedArray.length; i++)
-    	{ 
-    		cleanedArray[i] = newArray[i];
-    	}
-    	return cleanedArray;
+    
     }
     
-  
     public void quickSort(int l, int r)
     {
     	if (r-l <= 1)
@@ -475,23 +370,64 @@ public class SortingAlgorithmClass {
     	}
    }
     
-    
-    public int partition(int l,int r)
+    public void randomSort()
     {
-    	int pivot = array[r];
-    	int i = l-1;
-    	
-    	for (int j = l; j < r; j++)
+    	int keepAlive = 1;
+    	while(!isSorted())
     	{
-    		if (array[j] <= pivot)
-    		{
-    			i++;
-    			swap(j,i);
-    		}
+    		shuffle(true);
+    		keepAlive++;
+    		System.out.println(keepAlive);
     	}
-    	swap(r,i+1);
-    	return i+1;
     }
+    
+    public void recSlowSort(int[] array, int i, int j)
+    {
+    	if (i >= j)
+    	{
+    		return;
+    	}
+    	int m = (i+j)/2;
+    	recSlowSort(array,i,m);
+    	recSlowSort(array,m+1,j);
+    	
+    	if (array[m] > array[j])
+    	{
+    		int temp = array[m];
+    		array[m] = array[j];
+    		array[j] = temp;
+    	}
+    	
+    	recSlowSort(array,i,j-1);
+    	
+    }
+   
+    public void shuffle(boolean random)
+    {
+        Random dice;
+        
+        if (random)
+            dice = new Random((int)(Math.random() * 984648678) + 1);
+        
+        else
+            dice = new Random(42);
+
+        // Knuth Band 2
+        for (int i=0; i<array.length; i++)
+        {
+            int j = dice.nextInt(i+1);
+            int zwsp = array[i];
+            array[i] = array[j];
+            array[j] = zwsp;
+        }
+    }   
+    
+    
+    public void slowSort()
+    {
+    	recSlowSort(this.array,0,array.length-1);
+    }
+    
     
     public void swap(int int1, int int2)
     {
@@ -499,18 +435,97 @@ public class SortingAlgorithmClass {
     	array[int1] = array[int2];
     	array[int2] = temp;
     }
+    
+    
+    private void swapAtIndex(int i, int j)
+   	{
+   		int zwsp = array[i];
+   		array[i] = array[j];
+   		array[j] = zwsp;
+   	}
+   
+    
+    
+    
+    
+   
+    // Checks if the given array is sorted by recursively calling itself
+    private boolean recIsSorted(int index1,int index2)
+    {
+    	if (index2 == array.length-1)
+    	{
+    		if (array[index1] < array[index2])
+    			return true;
+    		else
+    			return false;
+    	}
+    	else
+    	{
+    		if (array[index1] > array[index2])
+    		{
+    			return false;
+    		}
+    		else {
+    			return recIsSorted(index1+1,index2+1);	
+    		}
+    	}
+    }
+    
+    public void shellSort() throws Exception
+    {
+    	if (array.length == 0)
+    	{
+    		throw new Exception("EMPTY ARRAY");
+    	}
+    	List<Integer> list = getPrattSequence(array.length);
+        for (int i = list.size()-1; i >= 0; i--)
+        {
+        	insertionSort(list.get(i));
+        }
+    } 
+    
+    public void selectionSort()
+    {
+    	int index = array.length;
+    	for (int i = 0; i < array.length-1; i++)
+    	{
+    		int highestIndex = 0;
+    		for (int j = 1; j < index; j++)
+    		{
+    			if (array[j] > array[highestIndex])
+    			{
+    				highestIndex = j;
+    			}
+    		}
+    		index--;
+    		swapAtIndex(highestIndex,index);
+    	}
+    }
+    
+    private void swapIfNeeded(int index1, int index2)
+    {
+    	if (array[index1] > array[index2])
+		{
+			int temp = array[index1];
+			array[index1] = array[index2];
+			array[index2] = temp;
+		}
+	}
+    
      
     public static void main(String args[]) throws Exception
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(15);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(8);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
         
-        s.shuffle(true);
-        s.quickSort();
-        System.out.println(s.isSorted());
+        s.array = new int[] {8,1,7,4,16,9,2,3};
+//        s.shuffle(true);
+        s.insertionSort();
         s.dump(60);
+        System.out.println(s.isSorted());
+//        s.dump(60);
 //        s.shuffle(true);
 //        s1.array = Arrays.copyOfRange(s.array, 0, s.array.length);
 //        s2.array = Arrays.copyOfRange(s.array, 0, s.array.length);
