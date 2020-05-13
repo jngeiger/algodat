@@ -292,7 +292,7 @@ public class SortingAlgorithmClass {
     
     public void quickSort()
     {
-    	quickSortRec(array, array.length);
+    	quickSortSelfRec(array, array.length);
     }
     
     private void quickSortRec(int[] theArray, int used)
@@ -350,6 +350,53 @@ public class SortingAlgorithmClass {
     		}
     		
     		
+    }
+    
+    private void quickSortSelfRec(int[] myArray, int size)
+    {
+    	if (size < 2)
+    	{return;}
+    	
+    	int[] leftSide = new int[size-1];
+    	int[] rightSide = new int[size-1];
+    	int[] pivotElements = new int[size];
+    	int lCnt = 0;
+    	int pCnt = 0;
+    	int rCnt = 0;
+    	
+    	int pivot = myArray[0];
+    	for (int i = 0; i < size; i++)
+    	{
+    		if (myArray[i] < pivot)
+    		{
+    			leftSide[lCnt++] = myArray[i];
+    		}
+    		if (myArray[i] == pivot)
+    		{
+    			pivotElements[pCnt++] = myArray[i];
+    		}
+    		if (myArray[i] > pivot)
+    		{
+    			rightSide[rCnt++] = myArray[i];
+    		}
+    	}
+    	
+    	quickSortSelfRec(leftSide,lCnt);
+    	quickSortSelfRec(rightSide,rCnt);
+    	
+    	int idx = 0;
+    	for (int i = 0; i < lCnt; i++)
+    	{
+    		myArray[idx] = leftSide[i]; idx++;
+    	}
+    	for (int i = 0; i < pCnt; i++)
+    	{
+    		myArray[idx] = pivotElements[i]; idx++;
+    	}
+    	for (int i = 0; i < rCnt; i++)
+    	{
+    		myArray[idx] = rightSide[i]; idx++;
+    	}
     }
     
     
@@ -455,12 +502,14 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(42);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(15);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
-    
+        
+        s.shuffle(true);
         s.quickSort();
+        System.out.println(s.isSorted());
         s.dump(60);
 //        s.shuffle(true);
 //        s1.array = Arrays.copyOfRange(s.array, 0, s.array.length);
@@ -488,7 +537,7 @@ public class SortingAlgorithmClass {
 //       System.out.println(s3.isSorted() + "INSERTION");
 //       System.out.println(System.currentTimeMillis() - f);
 
-        s.shuffle(true);
+        
 //        SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
 //        SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
 //        SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
@@ -515,10 +564,10 @@ public class SortingAlgorithmClass {
 //       System.out.println(s2.isSorted() + "BUBBLE");
 //       System.out.println(System.currentTimeMillis() - z);
        
-       long f = System.currentTimeMillis();
-       s.insertionSort();
-       System.out.println(s.isSorted() + "INSERTION");
-       System.out.println(System.currentTimeMillis() - f);
+//       long f = System.currentTimeMillis();
+//       s.insertionSort();
+//       System.out.println(s.isSorted() + "INSERTION");
+//       System.out.println(System.currentTimeMillis() - f);
 
        
 //			s.mergeSortMain();
