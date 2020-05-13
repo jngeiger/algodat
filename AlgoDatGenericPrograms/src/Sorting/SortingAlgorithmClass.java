@@ -455,7 +455,6 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {
-
         SortingAlgorithmClass s = new SortingAlgorithmClass(42);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
@@ -488,6 +487,39 @@ public class SortingAlgorithmClass {
 //       s3.insertionSort();
 //       System.out.println(s3.isSorted() + "INSERTION");
 //       System.out.println(System.currentTimeMillis() - f);
+
+        s.shuffle(true);
+//        SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
+//        SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
+//        SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
+//    
+//        
+//        s.shuffle(true);
+//        s1.array = Arrays.copyOfRange(s.array, 0, s.array.length);
+//        s2.array = Arrays.copyOfRange(s.array, 0, s.array.length);
+//        s3.array = Arrays.copyOfRange(s.array, 0, s.array.length);
+//        
+//       long x = System.currentTimeMillis();
+//       s.shellSort();
+//       System.out.println(s.isSorted()  + "SHELL");
+//       System.out.println(System.currentTimeMillis() - x);
+//       
+//       
+//       long y = System.currentTimeMillis();
+//       s1.mergeSortMain();
+//       System.out.println(s1.isSorted()  + "MERGE");
+//       System.out.println(System.currentTimeMillis() - y);
+       
+//       long z = System.currentTimeMillis();
+//       s2.bubbleSort();
+//       System.out.println(s2.isSorted() + "BUBBLE");
+//       System.out.println(System.currentTimeMillis() - z);
+       
+       long f = System.currentTimeMillis();
+       s.insertionSort();
+       System.out.println(s.isSorted() + "INSERTION");
+       System.out.println(System.currentTimeMillis() - f);
+
        
 //			s.mergeSortMain();
 //        s.recSlowSort(s.array, 0, s.array.length-1);
