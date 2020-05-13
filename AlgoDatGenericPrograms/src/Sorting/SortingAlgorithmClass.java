@@ -471,6 +471,24 @@ public class SortingAlgorithmClass {
     	}
     }
     
+    public void selectionSort()
+    {
+    	int index = array.length;
+    	for (int i = 0; i < array.length; i++)
+    	{
+    		int highestIndex = 0;
+    		for (int j = 0; j < index; j++)
+    		{
+    			if (array[j] > array[highestIndex])
+    			{
+    				highestIndex = j;
+    			}
+    		}
+    		index--;
+			swapAtIndex(highestIndex,index);
+    	}
+    }
+    
     public void shellSort() throws Exception
     {
     	if (array.length == 0)
@@ -484,23 +502,7 @@ public class SortingAlgorithmClass {
         }
     } 
     
-    public void selectionSort()
-    {
-    	int index = array.length;
-    	for (int i = 0; i < array.length-1; i++)
-    	{
-    		int highestIndex = 0;
-    		for (int j = 1; j < index; j++)
-    		{
-    			if (array[j] > array[highestIndex])
-    			{
-    				highestIndex = j;
-    			}
-    		}
-    		index--;
-    		swapAtIndex(highestIndex,index);
-    	}
-    }
+   
     
     private void swapIfNeeded(int index1, int index2)
     {
@@ -522,7 +524,7 @@ public class SortingAlgorithmClass {
         
         s.array = new int[] {8,1,7,4,16,9,2,3};
 //        s.shuffle(true);
-        s.insertionSort();
+        s.selectionSort();
         s.dump(60);
         System.out.println(s.isSorted());
 //        s.dump(60);
