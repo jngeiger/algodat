@@ -290,6 +290,69 @@ public class SortingAlgorithmClass {
     	return list;
     }
     
+    public void quickSort()
+    {
+    	quickSortRec(array, array.length);
+    }
+    
+    private void quickSortRec(int[] theArray, int used)
+    {
+    	if (used < 2) return;
+    	int lhs[] = new int[used-1];
+    	int lCnt=0;
+    	int rhs[] = new int[used-1];
+    	int rCnt=0;
+    	int pivots[] = new int[used];
+    	int pCnt=0;
+    	
+    	int pivot = theArray[0];
+    	
+    	for (int i = 0; i < used; i++)
+    	{
+    		int v = theArray[i];
+    		if (v < pivot) {
+    			lhs[lCnt] = v;
+    			lCnt ++;
+    		}
+    		
+    		if (v == pivot) {
+    			pivots[pCnt] = v;
+    			pCnt ++;
+    		}
+    		
+    		if (v > pivot) {
+    			rhs[rCnt] = v;
+    			rCnt ++;
+    		}
+    	}
+    	
+    		quickSortRec(lhs,lCnt);
+    		quickSortRec(rhs,rCnt);
+    		
+    		int idx = 0;
+    		for (int i = 0; i <lCnt;i++)
+    		{
+    			int v = lhs[i];
+    			theArray[idx] = v;
+    			idx++;
+    		}
+    		for (int i = 0; i <pCnt;i++)
+    		{
+    			int v = pivots[i];
+    			theArray[idx] = v;
+    			idx++;
+    		}
+    		for (int i = 0; i <rCnt;i++)
+    		{
+    			int v = rhs[i];
+    			theArray[idx] = v;
+    			idx++;
+    		}
+    		
+    		
+    }
+    
+    
     public void insertionSort()
     {
     	for (int i = 1; i < array.length; i++)
@@ -393,37 +456,38 @@ public class SortingAlgorithmClass {
     public static void main(String args[]) throws Exception
     {
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(1_234_567);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(42);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
     
-        
-        s.shuffle(true);
-        s1.array = Arrays.copyOfRange(s.array, 0, s.array.length);
-        s2.array = Arrays.copyOfRange(s.array, 0, s.array.length);
-        s3.array = Arrays.copyOfRange(s.array, 0, s.array.length);
-        
-       long x = System.currentTimeMillis();
-       s.shellSort();
-       System.out.println(s.isSorted()  + "SHELL");
-       System.out.println(System.currentTimeMillis() - x);
-       
-       
-       long y = System.currentTimeMillis();
-       s1.mergeSortMain();
-       System.out.println(s1.isSorted()  + "MERGE");
-       System.out.println(System.currentTimeMillis() - y);
-       
-       long z = System.currentTimeMillis();
-       s2.bubbleSort();
-       System.out.println(s2.isSorted() + "BUBBLE");
-       System.out.println(System.currentTimeMillis() - z);
-       
-       long f = System.currentTimeMillis();
-       s3.insertionSort();
-       System.out.println(s3.isSorted() + "INSERTION");
-       System.out.println(System.currentTimeMillis() - f);
+        s.quickSort();
+        s.dump(60);
+//        s.shuffle(true);
+//        s1.array = Arrays.copyOfRange(s.array, 0, s.array.length);
+//        s2.array = Arrays.copyOfRange(s.array, 0, s.array.length);
+//        s3.array = Arrays.copyOfRange(s.array, 0, s.array.length);
+//        
+//       long x = System.currentTimeMillis();
+//       s.shellSort();
+//       System.out.println(s.isSorted()  + "SHELL");
+//       System.out.println(System.currentTimeMillis() - x);
+//       
+//       
+//       long y = System.currentTimeMillis();
+//       s1.mergeSortMain();
+//       System.out.println(s1.isSorted()  + "MERGE");
+//       System.out.println(System.currentTimeMillis() - y);
+//       
+//       long z = System.currentTimeMillis();
+//       s2.bubbleSort();
+//       System.out.println(s2.isSorted() + "BUBBLE");
+//       System.out.println(System.currentTimeMillis() - z);
+//       
+//       long f = System.currentTimeMillis();
+//       s3.insertionSort();
+//       System.out.println(s3.isSorted() + "INSERTION");
+//       System.out.println(System.currentTimeMillis() - f);
        
 //			s.mergeSortMain();
 //        s.recSlowSort(s.array, 0, s.array.length-1);
