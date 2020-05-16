@@ -175,7 +175,6 @@ public class SortingAlgorithmClass {
             }
             array[j] = currentValue;
         }
-    	    
     }
     
     
@@ -246,10 +245,58 @@ public class SortingAlgorithmClass {
     	return i+1;
     }
     
+    private int _partitionHoare(int l, int r)
+    {
+    	 int pivot = array[l]; 
+    	    int left = l - 1;
+    	    int right = r + 1; 
+    	  
+    	    while (true) 
+    	    { 
+    	        // Find leftmost element greater 
+    	        // than or equal to pivot 
+    	        do
+    	        { 
+    	            left++; 
+    	        } while (array[left] < pivot); 
+    	  
+    	        // Find rightmost element smaller 
+    	        // than or equal to pivot 
+    	        do
+    	        { 
+    	            right--; 
+    	        } while (array[right] > pivot); 
+    	  
+    	        // If two pointers met. 
+    	        if (left < right) 
+    	        	swapAtIndex(left,right);
+    	        else {
+    	        return right; 
+    	        }
+    	    }
+    }
+    
     public void quickSort()
     {
     	quickSortSelfRec(array, array.length);
     }
+    
+    public void quickSortHoare()
+    {
+    	_quickSortHoareRec(0,array.length-1);
+    }
+    
+    private void _quickSortHoareRec(int l, int r)
+    {
+    	if (l < r)
+    	{
+    		int pivotIDX = _partitionHoare(l,r);
+    		_quickSortHoareRec(l,pivotIDX);
+    		_quickSortHoareRec(pivotIDX+1,r);
+    	}
+    }
+    
+   
     
     private void quickSortRec(int[] theArray, int used)
     {
@@ -524,7 +571,8 @@ public class SortingAlgorithmClass {
         
         s.array = new int[] {8,1,7,4,16,9,2,3};
 //        s.shuffle(true);
-        s.selectionSort();
+//        s.selectionSort();
+        s.quickSortHoare();
         s.dump(60);
         System.out.println(s.isSorted());
 //        s.dump(60);
