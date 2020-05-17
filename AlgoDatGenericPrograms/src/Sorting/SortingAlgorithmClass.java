@@ -247,33 +247,32 @@ public class SortingAlgorithmClass {
     
     private int _partitionHoare(int l, int r)
     {
-    	 int pivot = array[l]; 
-    	    int left = l - 1;
-    	    int right = r + 1; 
-    	  
-    	    while (true) 
-    	    { 
-    	        // Find leftmost element greater 
-    	        // than or equal to pivot 
-    	        do
-    	        { 
-    	            left++; 
-    	        } while (array[left] < pivot); 
-    	  
-    	        // Find rightmost element smaller 
-    	        // than or equal to pivot 
-    	        do
-    	        { 
-    	            right--; 
-    	        } while (array[right] > pivot); 
-    	  
-    	        // If two pointers met. 
-    	        if (left < right) 
-    	        	swapAtIndex(left,right);
-    	        else {
-    	        return right; 
-    	        }
-    	    }
+    	 int pivot = array[l];
+    	 int left = l-1;
+    	 int right = r+1;
+    	 
+    	 while(true)
+    	 {
+    		 do {
+    			 left++;
+    		 } while (array[left] < pivot);
+    		 
+    		 do {
+    			 right--;
+    		 } while (array[right] > pivot);
+    		 if (left < right)
+    		 {
+    			 swapAtIndex(left,right);
+    		 }
+    		 else 
+    		 {
+    			 return right;
+    		 }
+    	 }
+    	 
+    	 
+    	 
+    	 
     }
     
     public void quickSort()
