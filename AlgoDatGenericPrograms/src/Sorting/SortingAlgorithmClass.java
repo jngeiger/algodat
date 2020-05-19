@@ -623,10 +623,10 @@ public class SortingAlgorithmClass {
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
         
-        s.array = new int[] {8,1,7,4,16,9,2,3};
+        s.array = new int[] {1,123,1231,13221,1,44,2,444444,1,1,1231313,99};
         s.mergeSort();
         System.out.println(s.isSorted());
-        s.dump(650);
+        s.dump(6);
 //        s.shuffle(true);
 //        s.selectionSort();
 //        s.quickSortHoare();
