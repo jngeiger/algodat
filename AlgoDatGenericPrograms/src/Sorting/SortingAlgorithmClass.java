@@ -548,8 +548,63 @@ public class SortingAlgorithmClass {
         }
     } 
     
-   
+    public void mergeSort()
+    {
+    	int tmpMemory[] = new int[array.length];
+    	_mergeSortRec(0,array.length-1,tmpMemory);
+    }
     
+    private void _mergeSortRec(int l, int r, int tmpMemory[])
+    {
+    	if ((r-l) < 1)
+    	{
+    		return;
+    	}
+    	int m = (l+r)/2; 
+    	_mergeSortRec(l,m,tmpMemory);
+    	_mergeSortRec(m+1,r,tmpMemory);
+    	
+    	combine(l,m,r,tmpMemory);
+    }
+   
+    private void combine(int l, int m, int r, int[] tmpMemory)
+    {
+    	int l_01 = l;
+    	int r_01 = m;
+    	int l_02 = m+1;
+    	int r_02 = r;
+    	int idx = 0;
+    	
+    	int i = l_01;
+    	int j = l_02;
+    	
+    	while ((i <= r_01) && (j <= r_02))
+    	{
+    		if (array[i] < array[j])
+    		{
+    			tmpMemory[idx++] = array[i++];
+    		}
+    		else {
+    			tmpMemory[idx++] = array[j++];
+    		}
+    	}
+    	
+    	while (i <= r_01)
+    	{
+    		tmpMemory[idx++] = array[i++];
+    	}
+    	while (j <= r_02)
+    	{
+    		tmpMemory[idx++] = array[j++];
+    	}
+    	
+    	idx = 0;
+    	for (int k = l;  k <= r_02; k++)
+    	{
+    		array[k] = tmpMemory[idx++];
+    	}
+    	
+    }
     private void swapIfNeeded(int index1, int index2)
     {
     	if (array[index1] > array[index2])
@@ -569,11 +624,14 @@ public class SortingAlgorithmClass {
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
         
         s.array = new int[] {8,1,7,4,16,9,2,3};
+        s.mergeSort();
+        System.out.println(s.isSorted());
+        s.dump(650);
 //        s.shuffle(true);
 //        s.selectionSort();
-        s.quickSortHoare();
-        s.dump(60);
-        System.out.println(s.isSorted());
+//        s.quickSortHoare();
+//        s.dump(60);
+//        System.out.println(s.isSorted());
 //        s.dump(60);
 //        s.shuffle(true);
 //        s1.array = Arrays.copyOfRange(s.array, 0, s.array.length);
