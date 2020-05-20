@@ -8,6 +8,19 @@ import java.util.Random;
 public class SortingAlgorithmClass {
     public int array[]; // Fuer Debugging
     
+    SortingAlgorithmClass(int aSize, int maxNum)
+    {
+        array = new int[aSize];
+        
+        Random dice;
+        dice = new Random(42);
+        
+        for (int i = 0; i < aSize; i++)
+        {
+        	array[i] = dice.nextInt(maxNum+1);
+        }
+    }
+    
     SortingAlgorithmClass()
     {
         this(42);
@@ -618,12 +631,12 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(8);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(1000);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
         
-        s.array = new int[] {1,123,1231,13221,1,44,2,444444,1,1,1231313,99};
+       
         s.mergeSort();
         System.out.println(s.isSorted());
         s.dump(6);
