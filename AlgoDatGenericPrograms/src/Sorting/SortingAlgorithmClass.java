@@ -282,11 +282,34 @@ public class SortingAlgorithmClass {
     			 return right;
     		 }
     	 }
-    	 
-    	 
-    	 
-    	 
     }
+    
+    private int[] _partitionDF(int [] array, int l, int r) {
+    	int pivot = array[(l+r)/2];
+    	int smaller = l;
+    	int equals = l;
+    	int bigger = r;
+    	
+    	while (equals <= bigger)
+    	{
+    	if (array[equals] < pivot)
+    	{
+    		swapAtIndex(smaller,equals);
+    		smaller++; equals++;
+    	}
+    	else if (array[equals] == pivot)
+    	{
+    		equals++;
+    	}
+    	else {
+    		swapAtIndex(equals,bigger);
+    		bigger--;
+    	}
+    	}
+    	int[] result = new int[] {smaller,bigger};
+    	return result;
+    }
+    
     
     public void quickSort()
     {
@@ -618,6 +641,11 @@ public class SortingAlgorithmClass {
     	}
     	
     }
+    
+    
+    
+    
+    
     private void swapIfNeeded(int index1, int index2)
     {
     	if (array[index1] > array[index2])
@@ -627,6 +655,7 @@ public class SortingAlgorithmClass {
 			array[index2] = temp;
 		}
 	}
+    
     
      
     public static void main(String args[]) throws Exception
