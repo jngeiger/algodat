@@ -49,48 +49,48 @@ public class SortingAlgorithmClass {
     
     // HEAPSORT
     
-    private void createHeap()
+    public void heapSort()
     {
-    	for (int i=array.length/2-1; i >= 0; i--)
+    	for (int i = array.length-1; i >= 0; i--)
+    	{
+    		swapAtIndex(i,0);
+    		sink(0,i-1);
+    	}
+    }
+
+    public void createHeap()
+    {
+    	for (int i = (array.length-1)/2; i >= 0; i--)
     	{
     		sink(i,array.length-1);
     	}
     }
-    private int leftSonOf(int i)
-    {
-    	return 2*i+1;
-    }
     
-    private int rightSonOf(int i)
-    {
-    	return 2*i+2;
-    }
+    public int leftSonOf(int nodeId)
+    {return (nodeId * 2)+1;}
     
-    private void sink(int nodeId, int lastId)
+    public int rightSonOf(int nodeId)
+    {return (nodeId * 2)+2;}
+    
+    public void sink(int nodeId, int lastId)
     {
-    	while(leftSonOf(nodeId) <= lastId && rightSonOf(nodeId) <= lastId)
+    	while (leftSonOf(nodeId) <= lastId || rightSonOf(nodeId) <= lastId)
     	{
-    		
-    	
-    	//Testet lokale MaxHeap Eigenschaft und erstellt sie zur Not
-    	int maxId = leftSonOf(nodeId);
-    	if (array[rightSonOf(nodeId)] > array[leftSonOf(nodeId)])
-    	{
-    		maxId = rightSonOf(nodeId);
-    	}
-    	
-    	if (array[nodeId] < array[maxId])
-    	{
-    		swapAtIndex(nodeId,maxId);
-    		nodeId = maxId;
-    	}
-    	else 
-    		return;
-    	
+    		int maxId = leftSonOf(nodeId);
+    		if (rightSonOf(nodeId) <= lastId && array[rightSonOf(nodeId)] > array[leftSonOf(nodeId)])
+    		{
+    			maxId = rightSonOf(nodeId);
+    		}
+    		if (array[maxId] > array[nodeId])
+    		{
+    			swap(maxId,nodeId);
+    			nodeId = maxId;
+    		}
+    		else {
+    			return;
+    		}
     	}
     }
-    
-    
     
     public void bubbleSort()
     {
@@ -706,15 +706,19 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(8);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(60);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
         
-       //s.array = new int[] {1,2,3,4,5,6,7,8};
-        s.shuffle(true);
+       
+        //s.shuffle(true);
+        s.dump(60);
         s.createHeap();
-        System.out.println(s);
+        System.out.println("\nSPACER\n SHOW HEAP:");
+        s.dump(60);
+        System.out.println("\nRESULT:\n");
+        s.heapSort();
         s.dump(60);
 //        s.shuffle(true);
 //        s.selectionSort();
