@@ -287,6 +287,36 @@ public class SortingAlgorithmClass {
     	
     }
     
+    public void bucketSort()
+    {
+    	// Vereinfachte Variante; Keine negativen Werte ==> Minimum = 0;
+    	int max = array[0];
+    	int min = array[0];
+    	
+    	for (int i = 1; i < array.length;i++)
+    	{
+    		if (array[i] > max) max = array[i];
+    		if (array[i] < min) min = array[i];
+    	}
+    	
+    	
+    	int buckets[] = new int[max-min+1];
+    	
+    	for (int i = 0; i < array.length; i++)
+    	{
+    		buckets[array[i]] = buckets[array[i]] + 1;
+    	}
+    	
+    	int idx = 0;
+    	for (int b=0; b <= max; b++)
+    	{
+    		for (int i=0; i < buckets[b]; i++)
+    		{
+    			array[idx++] = b;
+    		}
+    	}
+    }
+    
     public int partition(int l,int r)
     {
     	int pivot = array[r];
@@ -714,11 +744,13 @@ public class SortingAlgorithmClass {
        
         //s.shuffle(true);
         s.dump(60);
-        s.createHeap();
-        System.out.println("\nSPACER\n SHOW HEAP:");
+        s.shuffle(true);
+//        s.createHeap();
+        System.out.println("\nSPACER\n SHOW UNSORTED:");
         s.dump(60);
         System.out.println("\nRESULT:\n");
-        s.heapSort();
+        s.array[23] = s.array[29];
+        s.bucketSort();
         s.dump(60);
 //        s.shuffle(true);
 //        s.selectionSort();
