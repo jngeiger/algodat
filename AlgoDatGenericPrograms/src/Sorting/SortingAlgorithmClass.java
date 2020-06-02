@@ -287,35 +287,136 @@ public class SortingAlgorithmClass {
     	
     }
     
-    public void bucketSort()
+    public void ownBucketSort(int[] array)
     {
-    	// Vereinfachte Variante; Keine negativen Werte ==> Minimum = 0;
     	int max = array[0];
-    	int min = array[0];
     	
-    	for (int i = 1; i < array.length;i++)
+    	for (int i = 1; i < array.length; i++)
     	{
-    		if (array[i] > max) max = array[i];
-    		if (array[i] < min) min = array[i];
+    		if (array[i] > max) max = array[i];	
     	}
     	
-    	
-    	int buckets[] = new int[max-min+1];
+    	int[] buckets = new int[max+1];
     	
     	for (int i = 0; i < array.length; i++)
     	{
-    		buckets[array[i]] = buckets[array[i]] + 1;
+    		buckets[array[i]]++;
     	}
     	
-    	int idx = 0;
-    	for (int b=0; b <= max; b++)
+    	//UPDATE buckets
+    	for (int i = 1; i <= max; i++)
     	{
-    		for (int i=0; i < buckets[b]; i++)
+    		buckets[i] = buckets[i] + buckets[i-1];
+    	}
+    	
+    	//reinsert
+    	int[] output = new int[array.length];
+    	for (int i = array.length-1; i >= 0; i--)
+    	{
+    		output[--buckets[array[i]]] = array[i];
+    	}
+    	 System.out.println(Arrays.toString(output));
+    	
+    }
+    
+    
+    //TBD
+    public void radixSort()
+    {
+    	int[] cache = new int[10];
+    	
+    	int max = array[0];
+    	for (int i = 1; i < array.length; i++)
+    	{
+    		if (array[i] > max)
     		{
-    			array[idx++] = b;
+    			max = array[i];
     		}
     	}
+    	int numberOfIterations = _getDigits(max);
+    	
+    	int decimalPlace = 0;
+    	
+    	for (int k = 0; k < numberOfIterations;k++)
+    	{
+    		_emptyCache(cache);
+    		for (int i = 0; i < array.length; i++)
+    		{
+    			if (_getDigitFromPos(array[i],decimalPlace) != -1)
+    			{
+    				cache[_getDigitFromPos(array[i],decimalPlace)]++;
+    			}
+    			else {
+    				continue;
+    			}
+    		}
+    		
+    	}
+    	
     }
+    
+    private static void _emptyCache(int[] cache)
+    {
+    	for (int i = 0; i < cache.length; i++)
+    	{
+    		cache[i] = 0;
+    	}
+    }
+    
+    private static int _getDigitFromPos(int nr, int pos)
+    {
+    	
+    	for (int i = 0; i < pos; i++)
+    	{
+    		nr = nr / 10;
+    		if (nr == 0)
+    		{
+    			return -1;
+    		}
+    	}
+    	return nr % 10;
+    }
+    
+    private static int _getDigits(int number)
+    {
+    	if (number == 0)
+    	{
+    		return 0;
+    	}
+    	else {
+    		return 1 + _getDigits(number/10);
+    	}
+    }
+    public void bucketSort()
+    {
+       int max = array[0];
+       int min = array[0];
+       
+       for (int i = 1; i < array.length; i++)
+       {
+    	   if (array[i] > max) max = array[i];
+    	   if (array[i] < min) min = array[i];
+       }
+       
+       int[] buckets = new int[max-min+1];
+       
+       for (int i = 0; i < array.length; i++)
+       {
+    	   buckets[array[i]-min]++;
+       }
+       
+       int idx = 0;
+       for (int i = 0; i < buckets.length; i++)
+       {
+    	   for (int j = 0; j < buckets[i]; j++)
+    	   {
+    		   array[idx++] = i+min;
+    	   }
+       }
+       
+    }
+    	
+    
     
     public int partition(int l,int r)
     {
@@ -736,22 +837,22 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(60);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(190);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
         
        
-        //s.shuffle(true);
-        s.dump(60);
         s.shuffle(true);
-//        s.createHeap();
-        System.out.println("\nSPACER\n SHOW UNSORTED:");
-        s.dump(60);
-        System.out.println("\nRESULT:\n");
-        s.array[23] = s.array[29];
-        s.bucketSort();
-        s.dump(60);
+        
+        
+        System.out.println(Arrays.toString(s.array));
+//        s.array = new int[] {123,431,333,452,119,125,423};
+        s.radixSort();
+        System.out.println(Arrays.toString(s.array));
+        System.out.println(s.isSorted());
+       
+
 //        s.shuffle(true);
 //        s.selectionSort();
 //        s.quickSortHoare();
