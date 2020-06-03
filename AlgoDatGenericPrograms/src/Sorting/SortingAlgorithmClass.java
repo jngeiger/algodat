@@ -321,9 +321,31 @@ public class SortingAlgorithmClass {
     
     
     //TBD
-    public void radixSort()
+    public void radixSort() throws Exception
     {
-    	int[] cache = new int[10];
+    	class Bucket {
+//    	ArrayList<Integer> intList;
+    	int[] array;
+    	int max = 0;
+    		public Bucket(int x)
+    		{
+//    		intList = new ArrayList<Integer>();
+    		array = new int[x];
+    		}
+    		public void push(int value)
+    		{
+    			array[max++] = value;
+//    			intList.add(value);
+    		}
+    		public int get(int index) throws Exception
+    		{
+    			return array[index];
+    		}
+    	}
+    	
+    	
+    	Bucket[] cache = new Bucket[10];
+    	
     	
     	int max = array[0];
     	for (int i = 1; i < array.length; i++)
@@ -335,33 +357,48 @@ public class SortingAlgorithmClass {
     	}
     	int numberOfIterations = _getDigits(max);
     	
-    	int decimalPlace = 0;
     	
     	for (int k = 0; k < numberOfIterations;k++)
-    	{
-    		_emptyCache(cache);
+    	{		
+    		for (int i = 0; i < 10; i++)
+        	{
+        		cache[i] = new Bucket(array.length);
+        	}
     		for (int i = 0; i < array.length; i++)
     		{
-    			if (_getDigitFromPos(array[i],decimalPlace) != -1)
-    			{
-    				cache[_getDigitFromPos(array[i],decimalPlace)]++;
-    			}
-    			else {
-    				continue;
-    			}
+    				cache[_getDigitFromPos(array[i],k)].push(array[i]);
     		}
+    		
+        	int idx2 = 0;
+        	for (int i = 0; i < cache.length; i++)
+        	{
+        		for (int j = 0; j < cache[i].max;j++)
+        		{
+        			array[idx2++] = cache[i].get(j);
+        		}
+        	}
+        	
     		
     	}
     	
+//    	int idx = 0;
+//		for (int i = 0; i < cache.length; i++)
+//		{
+//			try {
+//				while (true) {
+//				
+//					array[idx++] = cache[i].get();
+//				}
+//			}
+//			catch (Exception e){
+//				continue;
+//			}
+//		}
+//    	
+    	
     }
     
-    private static void _emptyCache(int[] cache)
-    {
-    	for (int i = 0; i < cache.length; i++)
-    	{
-    		cache[i] = 0;
-    	}
-    }
+    
     
     private static int _getDigitFromPos(int nr, int pos)
     {
@@ -371,7 +408,7 @@ public class SortingAlgorithmClass {
     		nr = nr / 10;
     		if (nr == 0)
     		{
-    			return -1;
+    			return 0;
     		}
     	}
     	return nr % 10;
@@ -836,21 +873,33 @@ public class SortingAlgorithmClass {
     
      
     public static void main(String args[]) throws Exception
-    {
-        SortingAlgorithmClass s = new SortingAlgorithmClass(190);
+    {	// 12345670
+        SortingAlgorithmClass s = new SortingAlgorithmClass(1_2340_567);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
         
        
+       
         s.shuffle(true);
+        long x = System.nanoTime();
         
-        
-        System.out.println(Arrays.toString(s.array));
-//        s.array = new int[] {123,431,333,452,119,125,423};
         s.radixSort();
-        System.out.println(Arrays.toString(s.array));
+        long y = System.nanoTime() - x;
+        
+//        System.out.println(Arrays.toString(s.array));
+        
+        System.out.println(y);
         System.out.println(s.isSorted());
+        
+//        s.array = new int[] {9000,123,123,431,333,452,119,125,423};
+//        s.dump(60);
+//        
+//        s.radixSort();
+//        System.out.println(Arrays.toString(s.array));
+
+//        System.out.println(Arrays.toString(s.array));
+//        System.out.println(s.isSorted());
        
 
 //        s.shuffle(true);
