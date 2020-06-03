@@ -2,6 +2,7 @@ package Sorting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -320,8 +321,51 @@ public class SortingAlgorithmClass {
     }
     
     
-    //TBD
+    
     public void radixSort() throws Exception
+    {	
+    	// Create and initialize Buckets
+    	LBucket[] cache = new LBucket[10];
+    	
+    	for (int i = 0; i < cache.length; i++)
+    	{
+    		cache[i] = new LBucket();
+    	}
+    	
+    	// Find Max and digits
+    	int max = array[0];
+    	for (int i = 1; i < array.length; i++)
+    	{
+    		if (array[i] > max)
+    		{
+    			max = array[i];
+    		}
+    	}
+    	
+    	int numberOfIterations = _getDigits(max);
+    	
+    	
+    	// Run Sort k times
+    	for (int k = 0; k < numberOfIterations;k++)
+    	{		
+    		
+    		for (int i = 0; i < array.length; i++)
+    		{
+    				cache[_getDigitFromPos(array[i],k)].insert(array[i]);
+    		}
+    		
+        	int idx = 0;
+        	for (int i = 0; i < cache.length; i++)
+        	{
+        		while (cache[i].counter > 0)
+        		{
+        			array[idx++] = cache[i].getFIFO();
+        		}
+        		
+        	}
+    	} 	
+    }
+    public void radixSortArray() throws Exception
     {
     	class Bucket {
 //    	ArrayList<Integer> intList;
@@ -380,22 +424,6 @@ public class SortingAlgorithmClass {
         	
     		
     	}
-    	
-//    	int idx = 0;
-//		for (int i = 0; i < cache.length; i++)
-//		{
-//			try {
-//				while (true) {
-//				
-//					array[idx++] = cache[i].get();
-//				}
-//			}
-//			catch (Exception e){
-//				continue;
-//			}
-//		}
-//    	
-    	
     }
     
     
@@ -874,7 +902,7 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {	// 12345670
-        SortingAlgorithmClass s = new SortingAlgorithmClass(1_2340_567);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(1234567);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
@@ -891,6 +919,7 @@ public class SortingAlgorithmClass {
         
         System.out.println(y);
         System.out.println(s.isSorted());
+        
         
 //        s.array = new int[] {9000,123,123,431,333,452,119,125,423};
 //        s.dump(60);
