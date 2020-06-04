@@ -324,13 +324,31 @@ public class SortingAlgorithmClass {
     
     public void radixSort() throws Exception
     {	
-    	// Create and initialize Buckets
-    	LBucket[] cache = new LBucket[10];
+    	// Custom Array Buckets
+    	class ABucket {
+//        	ArrayList<Integer> intList;
+        	int[] array;
+        	int max = 0;
+        		public ABucket(int x)
+        		{
+//        		intList = new ArrayList<Integer>();
+        		array = new int[x];
+        		}
+        		public void push(int value)
+        		{
+        			array[max++] = value;
+//        			intList.add(value);
+        		}
+        		public int get(int index) throws Exception
+        		{
+        			return array[index];
+        		}
+        	}
     	
-    	for (int i = 0; i < cache.length; i++)
-    	{
-    		cache[i] = new LBucket();
-    	}
+    	// Create and initialize Buckets
+    	ABucket[] cache = new ABucket[10];
+    	
+    	
     	
     	// Find Max and digits
     	int max = array[0];
@@ -348,18 +366,22 @@ public class SortingAlgorithmClass {
     	// Run Sort k times
     	for (int k = 0; k < numberOfIterations;k++)
     	{		
+    		for (int i = 0; i < cache.length; i++)
+        	{
+        		cache[i] = new ABucket(array.length);
+        	}
     		
     		for (int i = 0; i < array.length; i++)
     		{
-    				cache[_getDigitFromPos(array[i],k)].insert(array[i]);
+    				cache[_getDigitFromPos(array[i],k)].push(array[i]);
     		}
     		
         	int idx = 0;
         	for (int i = 0; i < cache.length; i++)
         	{
-        		while (cache[i].counter > 0)
+        		for (int j = 0; j < cache[i].max; j++)
         		{
-        			array[idx++] = cache[i].getFIFO();
+        			array[idx++] = cache[i].get(j);
         		}
         		
         	}
@@ -902,7 +924,7 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {	// 12345670
-        SortingAlgorithmClass s = new SortingAlgorithmClass(1234567);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(1000000, 50);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
@@ -910,15 +932,18 @@ public class SortingAlgorithmClass {
        
        
         s.shuffle(true);
-        long x = System.nanoTime();
-        
-        s.radixSort();
-        long y = System.nanoTime() - x;
+        long x = System.currentTimeMillis();
+//        s.mergeSort();
+        s.mergeSort();
+        long y = System.currentTimeMillis();
+        long result = y - x;
+        System.out.println(result);
         
 //        System.out.println(Arrays.toString(s.array));
         
-        System.out.println(y);
+        
         System.out.println(s.isSorted());
+        
         
         
 //        s.array = new int[] {9000,123,123,431,333,452,119,125,423};
