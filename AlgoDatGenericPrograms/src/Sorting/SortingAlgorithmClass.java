@@ -902,7 +902,7 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {	// 12345670
-        SortingAlgorithmClass s = new SortingAlgorithmClass(1234567);
+        SortingAlgorithmClass s = new SortingAlgorithmClass(24345678);
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
@@ -912,7 +912,7 @@ public class SortingAlgorithmClass {
         s.shuffle(true);
         long x = System.nanoTime();
         
-        s.radixSort();
+        s.mergeSort();
         long y = System.nanoTime() - x;
         
 //        System.out.println(Arrays.toString(s.array));
