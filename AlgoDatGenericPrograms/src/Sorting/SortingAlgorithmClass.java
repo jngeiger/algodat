@@ -924,11 +924,11 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {	// 12345670
-<<<<<<< HEAD
+
         SortingAlgorithmClass s = new SortingAlgorithmClass(24345678);
-=======
-        SortingAlgorithmClass s = new SortingAlgorithmClass(1000000, 50);
->>>>>>> branch 'master' of https://github.com/jngeiger/algodat.git
+
+  
+
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
@@ -936,19 +936,18 @@ public class SortingAlgorithmClass {
        
        
         s.shuffle(true);
-<<<<<<< HEAD
-        long x = System.nanoTime();
+
+     
         
         s.mergeSort();
-        long y = System.nanoTime() - x;
-=======
+
         long x = System.currentTimeMillis();
 //        s.mergeSort();
         s.mergeSort();
         long y = System.currentTimeMillis();
         long result = y - x;
         System.out.println(result);
->>>>>>> branch 'master' of https://github.com/jngeiger/algodat.git
+
         
 //        System.out.println(Arrays.toString(s.array));
         
