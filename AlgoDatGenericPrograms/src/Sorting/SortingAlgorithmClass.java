@@ -924,7 +924,11 @@ public class SortingAlgorithmClass {
      
     public static void main(String args[]) throws Exception
     {	// 12345670
-        SortingAlgorithmClass s = new SortingAlgorithmClass(1000000, 50);
+
+        SortingAlgorithmClass s = new SortingAlgorithmClass(24345678);
+
+  
+
         SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
         SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
@@ -932,12 +936,18 @@ public class SortingAlgorithmClass {
        
        
         s.shuffle(true);
+
+     
+        
+        s.mergeSort();
+
         long x = System.currentTimeMillis();
 //        s.mergeSort();
         s.mergeSort();
         long y = System.currentTimeMillis();
         long result = y - x;
         System.out.println(result);
+
         
 //        System.out.println(Arrays.toString(s.array));
         
