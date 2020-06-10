@@ -58,8 +58,8 @@ public class First {
     	ArrayList<TreeNode<Integer>> tempList = new ArrayList<TreeNode<Integer>>();
     	
     	int height = 1;
-    	int marker = root.getValue();
-    	int runtimeIdx = 0;
+    	int limit = root.getValue();
+    	int amountOfRunsPerLevel = 0;
     	int counter = 0;
     	
     	
@@ -77,10 +77,10 @@ public class First {
     			node.add(temp);
     			tempList.add(temp);	
     			counter += temp.getValue();
-    			runtimeIdx++;
+    			amountOfRunsPerLevel++;
     		}
     		
-    		if (marker == runtimeIdx)
+    		if (limit == amountOfRunsPerLevel)
     		{
     			height++;
     			if (height >= maxHeight)
@@ -88,8 +88,8 @@ public class First {
     				return root;
     			}
     			else {
-    				marker = counter;
-    				runtimeIdx = 0;
+    				limit = counter;
+    				amountOfRunsPerLevel = 0;
     				counter = 0;
     			}
     		}
@@ -109,7 +109,7 @@ public class First {
 //        System.out.println();
 //        root.breadthFirst(); 
         First pi = new First();
-        TreeNode<Integer> piroot = pi.createPiTree(1);
+        TreeNode<Integer> piroot = pi.createPiTree(10);
         piroot.breadthFirst();
 //        root.breadthFirstPerLine();
 //        System.out.println(root.isInTree("Chai"));
