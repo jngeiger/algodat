@@ -104,17 +104,10 @@ public class First {
         First treeController = new First();
         TreeNode<String> root = treeController.createTree();
         Consumer<TreeNode<String>> printNode = a -> {System.out.println(a.getValue());};
-//        root.depthFirst();
-//
-//        System.out.println();
-//        root.breadthFirst(); 
+
         First pi = new First();
-        TreeNode<Integer> piroot = pi.createPiTree(10);
+        TreeNode<Integer> piroot = pi.createPiTree(3);
         piroot.breadthFirst();
-//        root.breadthFirstPerLine();
-//        System.out.println(root.isInTree("Chai"));
-//        First pi = new First();
-//        TreeNode<Integer> piroot = pi.createPiTree();
-//        piroot.depthFirst();
+
     }
 }
