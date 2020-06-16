@@ -88,13 +88,13 @@ public class SortedArray {
        }
        return false;
     }
+  
     
     public static void main(String args[])
     {
         SortedArray myArray = new SortedArray();
-        
-        System.out.println(myArray.findFastInArray(2));
-        System.out.println(myArray.findInArrayFastRec(2));
+        System.out.println(myArray.findFastInArray(4));
+        System.out.println(myArray.findInArrayFastRec(4));
        
     }
 }
