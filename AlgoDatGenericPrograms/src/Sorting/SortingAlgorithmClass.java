@@ -52,6 +52,7 @@ public class SortingAlgorithmClass {
     
     public void heapSort()
     {
+    	createHeap();
     	for (int i = array.length-1; i >= 0; i--)
     	{
     		swapAtIndex(i,0);
