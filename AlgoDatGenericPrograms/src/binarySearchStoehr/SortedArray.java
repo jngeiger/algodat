@@ -58,13 +58,7 @@ public class SortedArray {
     		return false;
     	}
     	else {
-    		if (aValue < aArray[(lo+hi)/2])
-    		{
-    			return _findInArrayFastRec(aValue,lo,((lo+hi)/2)-1);
-    		}
-    		else {
-    			return _findInArrayFastRec(aValue,((lo+hi)/2)+1,hi);
-    		}
+    		return (aValue < aArray[(lo+hi)/2]) ? _findInArrayFastRec(aValue,lo,((lo+hi)/2)-1) : _findInArrayFastRec(aValue,((lo+hi)/2)+1,hi);
     	}
     }
 
