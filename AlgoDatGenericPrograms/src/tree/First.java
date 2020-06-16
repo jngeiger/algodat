@@ -95,8 +95,11 @@ public class First {
     		}
     		node = tempList.get(listIdx++);	
     	}
+    	
+    	
     	return root;
     }
+    
     
     
     static public void main(String args[])
@@ -108,6 +111,9 @@ public class First {
         First pi = new First();
         TreeNode<Integer> piroot = pi.createPiTree(3);
         piroot.breadthFirst();
+        TreeNode<String> root2 = treeController.createTree();
+        First node = new First();
+        System.out.println(root2.isInTree("Tea"));
 
     }
 }
