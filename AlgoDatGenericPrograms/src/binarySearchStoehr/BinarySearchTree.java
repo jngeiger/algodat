@@ -15,10 +15,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 	{
 		return root.toString();
 	}
-	public void insert(T value) 
-	{
-		
-	}
+
 	public Boolean find(T value) 
 	{
 		BinaryNode<T> node = root;
