@@ -110,12 +110,19 @@ public class BST<T extends Comparable<? super T>> {
     	BinaryNode<T> parent = root;
     	while (currentNode != null)
     	{
-    		 parent = currentNode;
+    		
     		 if (value.compareTo(currentNode.getValue()) == 0)
     		 {
     			 if ((currentNode.leftChild == null) && (currentNode.rightChild == null)) {
-    				 currentNode = null;
-    				 return;
+    				 if (parent.leftChild == currentNode)
+    				 {
+    					 parent.leftChild = null;
+    					 return;
+    				 }
+    				 else {
+    					 parent.rightChild = null;
+    					 return;
+    				 }
     			 }
     			 if (currentNode.leftChild == null) {
     				 parent.rightChild = currentNode.rightChild;
@@ -135,6 +142,7 @@ public class BST<T extends Comparable<? super T>> {
     			 }
     			 while (temp.leftChild != null)
     			 {
+    				 parent = temp;
     				 temp = temp.leftChild;
     			 }
     			 currentNode.setValue(temp.getValue());
@@ -143,10 +151,12 @@ public class BST<T extends Comparable<? super T>> {
     		 }
     		 else if (value.compareTo(currentNode.getValue()) < 0)
     		 {
+    			 parent = currentNode;
     			 currentNode = currentNode.leftChild;
     		 }
-    		 else {
-    			 currentNode = currentNode.leftChild;
+    		 else if (value.compareTo(currentNode.getValue()) > 0) {
+    			 parent = currentNode;
+    			 currentNode = currentNode.rightChild;
     		 }
     		 
     	}

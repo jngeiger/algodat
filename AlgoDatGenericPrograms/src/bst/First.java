@@ -58,7 +58,7 @@ public class First {
 //            l.insert(i);  
 //        System.out.println(l);
         
-        int values[] = {3,1,4,0,2,8,99,4,121,88,21,54,66,21,65,73};
+        int values[] = {3,1,0,2,8,99,4,121,122,120,124,88};
 //        BST<Integer> b = new BST<Integer>();
 //        for (int v : values)
 //            b.insert(v);
@@ -78,7 +78,7 @@ public class First {
             br.insertRec(v);
         System.out.println(br);
         
-        br.deleteIter(66);
+        br.deleteIter(99);
         System.out.println(br);
     }
 }
