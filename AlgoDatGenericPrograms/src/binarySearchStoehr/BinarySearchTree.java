@@ -32,4 +32,41 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 		}
 		return (node!=null);
 	}
+	
+	public void insert(T value)
+	{
+		BinaryNode<T> newNode = new BinaryNode<T>(value);
+		BinaryNode<T> currentNode = root;
+		
+		if (root == null)
+		{
+			root = newNode;
+			return;
+		}
+		
+		BinaryNode<T> parent = null;
+		// Blattposition suchen
+		while (currentNode != null)
+		{
+			parent = currentNode;
+			if (value.compareTo(currentNode.getValue()) < 0)
+			{
+				currentNode = currentNode.leftChild;
+			}
+			else {
+				currentNode = currentNode.rightChild;
+			}
+		}
+		
+		// Knoten einfügen
+		if (value.compareTo(parent.getValue()) < 0)
+		{
+			parent.leftChild = newNode;
+		}
+		else {
+			parent.rightChild = newNode;
+		}
+		
+	}
+	
 }
