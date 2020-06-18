@@ -926,9 +926,9 @@ public class SortingAlgorithmClass {
     public static void main(String args[]) throws Exception
     {	// 12345670
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(13);
-        s.array = new int[] {12,13,11,10,9,8,7,6,5,4,3,2,1};
-        s.quickSortHoare();
+        SortingAlgorithmClass s = new SortingAlgorithmClass(9);
+        s.array = new int[] {1,2,3,4,5,6,7,8,9};
+        s.createHeap();
         System.out.println(Arrays.toString(s.array));
         
        
