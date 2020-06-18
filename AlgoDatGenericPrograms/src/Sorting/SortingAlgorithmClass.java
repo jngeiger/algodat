@@ -926,34 +926,20 @@ public class SortingAlgorithmClass {
     public static void main(String args[]) throws Exception
     {	// 12345670
 
-        SortingAlgorithmClass s = new SortingAlgorithmClass(24345678);
-
+        SortingAlgorithmClass s = new SortingAlgorithmClass(13);
+        s.array = new int[] {12,13,11,10,9,8,7,6,5,4,3,2,1};
+        s.quickSortHoare();
+        System.out.println(Arrays.toString(s.array));
+        
+       
   
-
-        SortingAlgorithmClass s1 = new SortingAlgorithmClass(1_234_567);
-        SortingAlgorithmClass s2 = new SortingAlgorithmClass(1_234_567);
-        SortingAlgorithmClass s3 = new SortingAlgorithmClass(1_234_567);
-        
-       
-       
-        s.shuffle(true);
-
-     
-        
-        s.mergeSort();
-
-        long x = System.currentTimeMillis();
 //        s.mergeSort();
-        s.mergeSort();
-        long y = System.currentTimeMillis();
-        long result = y - x;
-        System.out.println(result);
+
 
         
 //        System.out.println(Arrays.toString(s.array));
         
-        
-        System.out.println(s.isSorted());
+
         
         
         
