@@ -109,6 +109,15 @@ public Queue()
     return array.length;
     }
     
+    public String toString()  
+	{
+		String v=" | ";
+		for(int i =0;i<array.length;i++)
+			v += array[i] + " | ";
+//		v += "\nLength: " + q.length;
+		return v;
+	}
+    
     public static void main(String [] args) throws Exception
     {
 //    	Queue<String> q = new Queue<String>();
@@ -155,86 +164,129 @@ public Queue()
 //    	System.out.println(q2.get());
 //    	System.out.println(q2.get());
     	
-    	Queue<Integer> q=new Queue<Integer>();
-
-		System.out.println("");
-		System.out.println("===TEST0===");
-		System.out.println(q.isEmpty());
-		System.out.println(q.get());
-		System.out.println(q.isEmpty());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.isEmpty());
-
-		System.out.println("");
-		System.out.println("===TEST1===");
-		System.out.println(q.isEmpty());
-		q.put(11);
-		System.out.println(q.isEmpty());			
-		System.out.println(q.get());
-		System.out.println(q.isEmpty());
-
-		System.out.println("");
-		System.out.println("===TEST2===");
-		System.out.println(q.getArraySize());
-		q.put(21);
-		System.out.println(q.get());
-		System.out.println(q.get());
-
-		System.out.println("");
-		System.out.println("===TEST3===");
-		q.put(31);
-		q.put(32);
-		q.put(33);
-		q.put(34);
-		q.put(35);
-		q.put(36);
-		q.put(37);
-		q.put(38);
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-
-		System.out.println("");
-		System.out.println("===TEST4===");
-		q.put(41);
-		q.put(42);
-		q.put(43);
-		q.put(44);
-		q.put(45);
-		q.put(46);
-		q.put(47);
-		q.put(48);
-
-
-		q.put(49);
-		q.put(410);
-		q.put(411);
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-		System.out.println(q.get());
-    	
-    	
+//    	Queue<Integer> q=new Queue<Integer>();
+//
+//		System.out.println("");
+//		System.out.println("===TEST0===");
+//		System.out.println(q.isEmpty());
+//		System.out.println(q.get());
+//		System.out.println(q.isEmpty());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.isEmpty());
+//
+//		System.out.println("");
+//		System.out.println("===TEST1===");
+//		System.out.println(q.isEmpty());
+//		q.put(11);
+//		System.out.println(q.isEmpty());			
+//		System.out.println(q.get());
+//		System.out.println(q.isEmpty());
+//
+//		System.out.println("");
+//		System.out.println("===TEST2===");
+//		System.out.println(q.getArraySize());
+//		q.put(21);
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//
+//		System.out.println("");
+//		System.out.println("===TEST3===");
+//		q.put(31);
+//		q.put(32);
+//		q.put(33);
+//		q.put(34);
+//		q.put(35);
+//		q.put(36);
+//		q.put(37);
+//		q.put(38);
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//
+//		System.out.println("");
+//		System.out.println("===TEST4===");
+//		q.put(41);
+//		q.put(42);
+//		q.put(43);
+//		q.put(44);
+//		q.put(45);
+//		q.put(46);
+//		q.put(47);
+//		q.put(48);
+//
+//
+//		q.put(49);
+//		q.put(410);
+//		q.put(411);
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//		System.out.println(q.get());
+//    	
+    	Queue<Integer> q1 = new Queue<Integer>(); 
+		q1.put(1);
+		System.out.println(q1);
+		q1.put(2);
+		System.out.println(q1);
+		q1.put(3);
+		System.out.println(q1);
+		q1.put(4);
+		System.out.println(q1);
+		q1.put(5);
+		System.out.println(q1);
+		q1.get();
+		System.out.println(q1);
+		q1.put(4);
+		q1.put(4);
+		q1.put(4);
+		q1.put(300);
+		System.out.println(q1);
+//		q1.put(6);
+//		System.out.println(q1);
+//		q1.put(7);
+//		System.out.println(q1);
+//		q1.put(8);
+//		System.out.println(q1);
+//		q1.put(9);
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
+//		q1.get();
+//		System.out.println(q1);
   
    
     }
