@@ -117,7 +117,7 @@ public class SingleLinkedList<T>
 		private Node prev;
 		private T value;
 		@SuppressWarnings("unused")
-		public Node(T value) 
+		private Node(T value) 
 		{
 			this.value = value;
 			this.next = null;

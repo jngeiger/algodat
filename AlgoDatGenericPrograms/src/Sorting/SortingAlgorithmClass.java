@@ -927,8 +927,8 @@ public class SortingAlgorithmClass {
     {	// 12345670
 
         SortingAlgorithmClass s = new SortingAlgorithmClass(9);
-        s.array = new int[] {1,2,3,4,5,6,7,8,9};
-        s.createHeap();
+        s.array = new int[] {6,17,3,42,8,9,4,60};
+        s.quickSort();
         System.out.println(Arrays.toString(s.array));
         
        
