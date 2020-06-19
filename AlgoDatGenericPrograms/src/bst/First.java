@@ -78,7 +78,7 @@ public class First {
             br.insertRec(v);
         System.out.println(br);
         
-        br.deleteIter(414);
+        br.deleteIter(1);
         System.out.println(br);
     }
 }
