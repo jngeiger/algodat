@@ -61,6 +61,7 @@ public class SortedArray {
     		return (aValue < aArray[(lo+hi)/2]) ? _findInArrayFastRec(aValue,lo,((lo+hi)/2)-1) : _findInArrayFastRec(aValue,((lo+hi)/2)+1,hi);
     	}
     }
+    
 
     Boolean findFastInArray(int aValue)
     {
