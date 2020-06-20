@@ -71,6 +71,13 @@ public void traversalInOrder()
 	if (rightChild != null) rightChild.traversalInOrder();
 }
 
+public void traversalPostOrder()
+{
+	if (leftChild != null) leftChild.traversalInOrder();
+	System.out.println(getValue());
+	if (rightChild != null) rightChild.traversalInOrder();
+}
+
 
 public static void main(String[] args)
 {
