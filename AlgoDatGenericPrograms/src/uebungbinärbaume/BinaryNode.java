@@ -81,16 +81,27 @@ public void traversalPostOrder()
 
 public static void main(String[] args)
 {
-	BinaryNode<String> root = new BinaryNode<String>("ROOT");
-	root.leftChild = new BinaryNode<String>("FIRST");
-	root.rightChild = new BinaryNode<String>("SECOND");	
-	root.rightChild.leftChild = new BinaryNode<String>("THIRD");
-	root.rightChild.leftChild.leftChild = new BinaryNode<String>("Fourth");
-	root.rightChild.leftChild.leftChild.rightChild = new BinaryNode<String>("Five");
+	BinaryNode<Integer> root = new BinaryNode<Integer>(50);
+
 	
+	BST<Integer> bst = new BST<Integer>(root);
+	
+	bst.insert(25);
+	bst.insert(75);
+	bst.insert(87);
+	bst.insert(12);
+	bst.insert(10);
+	bst.insert(17);
+	bst.insert(37);
+	bst.insert(32);
+	bst.insert(27);
+	bst.insert(33);
+	bst.insert(45);
+
 	System.out.println(root);
-	System.out.println(root.getHeight());
-	root.traversalInOrder();
+	bst.delete(50);
+	System.out.println(root);
+	
 }
 
 

@@ -152,8 +152,14 @@ public class BST<T extends Comparable<? super T>> {
     				 parent = temp;
     				 temp = temp.leftChild;
     			 }
+    			 BinaryNode<T> temp2 = null; 
+    			 if (temp.rightChild != null)
+    			 {
+    				 temp2 = temp.rightChild;
+    			 }
+    			 parent.leftChild = temp2;
     			 currentNode.setValue(temp.getValue());
-    			 parent.leftChild = null;
+    			 
     			 return;
     		 }
     		 else if (value.compareTo(currentNode.getValue()) < 0)
