@@ -1,6 +1,5 @@
 package splay;
 
-import org.graalvm.compiler.lir.LIRInstruction.Temp;
 
 public class SplayTree<T extends Comparable<? super T>> {
     
@@ -75,6 +74,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     
     private SplayNode<T> _delete(SplayNode<T> currentNode, T value)
     {
+    	
         if (currentNode == null) return null;
 
         if (value.compareTo(currentNode.getValue()) == 0)
@@ -127,12 +127,59 @@ public class SplayTree<T extends Comparable<? super T>> {
 
     public void printWayToNode(T value)
     {
-        // Ausgabe der Knoten von der Wurzel zum Knoten mit "value"
+      printWayToNodeRec(value,root);
     }
-        
+    
+    public void printWayToNodeRec(T value, SplayNode<T> currentNode)
+    {
+    	System.out.println(currentNode.getValue());
+    	if (value.compareTo(currentNode.getValue()) == 0)
+    	{
+    		return;
+    	}
+    	if (value.compareTo(currentNode.getValue()) > 0)
+    	{
+    		if (currentNode.rightChild != null)
+    			printWayToNodeRec(value,currentNode.rightChild);
+    	}
+    	else {
+    		if (currentNode.leftChild != null)
+    		{
+    			printWayToNodeRec(value,currentNode.leftChild);
+    		}
+    	}
+    	
+    }
+    
     public void printWayBack(T value)
     {
-        // Ausgabe von Wurzel rauf zum Knoten
+        printWayBackRec(value,root);
+    }
+    
+    public void printWayBackRec(T value, SplayNode<T> currentNode)
+    {
+    	if (value.compareTo(currentNode.getValue()) == 0)
+    	{
+    		System.out.println(currentNode.getValue());
+    		return;
+    	}
+    	if (value.compareTo(currentNode.getValue()) > 0)
+    	{
+    		if (currentNode.rightChild != null)
+    			printWayBackRec(value,currentNode.rightChild);
+    			System.out.println(currentNode.getValue());
+    	}
+    	else {
+    		if (currentNode.leftChild != null)
+    		{
+    			printWayBackRec(value,currentNode.leftChild);
+    			System.out.println(currentNode.getValue());
+    		}
+    	}
+    
+    	
+    
+    	
     }
     
 }
