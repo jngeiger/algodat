@@ -12,13 +12,13 @@ public class First {
         System.out.println(complexTree+"\n");
         
         System.out.println("To Node");
-//        complexTree.printWayToNode(15);
-        complexTree.printWayBack(4);
-//        System.out.println();
-//
-//        System.out.println("From Node");
-//        complexTree.printWayBack(15);
-//        System.out.println();
+        complexTree.printWayToNode(15);
+        
+        System.out.println();
+
+        System.out.println("From Node");
+        complexTree.printWayBack(15);
+        System.out.println();
 //        
 //        // #####     #####     #####     #####     #####     #####
 //        int nodes[] = {5,2,7,1,4,6,9,3,21,42};
