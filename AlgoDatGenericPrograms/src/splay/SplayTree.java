@@ -205,41 +205,39 @@ public class SplayTree<T extends Comparable<? super T>> {
     			currentNode.leftChild.rightChild = _splay(currentNode.leftChild.rightChild,value);
     			currentNode.leftChild = leftRotation(currentNode.leftChild);  
     		}
+    		
+    		
+    		if (currentNode.leftChild != null)
+			{
+    			return rightRotation(currentNode);
+			}
+	
+    	 }
     	 
-    	 
-    	 if (currentNode.leftChild == null)
-    	 {
-    		 return currentNode;
-    	 }
-    	 else {
-    		 return rightRotation(currentNode);
-    	 }
-    	 }
     	 else 
          {  
-             
-             if (currentNode.rightChild == null) return currentNode;  
-   
-           
              if (currentNode.rightChild.getValue().compareTo(value) > 0)  
              {  
                  currentNode.rightChild.leftChild = _splay(currentNode.rightChild.leftChild, value);  
-   
-                 if (currentNode.rightChild.leftChild != null)  
-                     currentNode.rightChild = rightRotation(currentNode.rightChild);  
+                 currentNode.rightChild = rightRotation(currentNode.rightChild);  
              }  
              else if (currentNode.rightChild.getValue().compareTo(value) < 0)
              {  
                  currentNode.rightChild.rightChild = _splay(currentNode.rightChild.rightChild, value);  
-                 currentNode = leftRotation(currentNode);  
+                 currentNode.rightChild = leftRotation(currentNode.rightChild);  
              }  
-   
              
-             if (currentNode.rightChild == null) 
-                 return currentNode;
-             else 
-                 return leftRotation(currentNode);  
+             if (currentNode.rightChild != null) 
+             {
+            	 return leftRotation(currentNode);  
+             }
+             
          } 
+    	 
+    	 
+    	 
+    	 return currentNode;
+    	 
     }
     
     	
