@@ -8,7 +8,7 @@ public class First {
         SplayTree<Integer> complexTree2 = new SplayTree<Integer>();
         
         
-       int nodes[] = {40, 25, 72, 13, 30, 60, 76, 6, 17, 27, 34, 45, 66, 81, 1, 9, 19, 42, 52, 53, 7, 55, 56};
+       int nodes[] = {71, 25,36,1,14,19,29,99,50};
         complexTree = new SplayTree<Integer>();
         for (int v : nodes)
         {
@@ -25,10 +25,9 @@ public class First {
        
         
         System.out.println(complexTree+"\n");
-        complexTree.splay(52);
-        complexTree2.splay_stoehr_init(52);
+        complexTree.splay(29);
         System.out.println(complexTree+"\n");
-        System.out.println(complexTree2+"\n");
+        
 
         
         
