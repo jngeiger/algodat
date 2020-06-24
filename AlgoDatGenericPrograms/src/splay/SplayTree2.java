@@ -1,16 +1,17 @@
 package splay;
 
 
-public class SplayTree<T extends Comparable<? super T>> {
+
+public class SplayTree2<T extends Comparable<? super T>> {
     
     public SplayNode<T> root;
 
-    SplayTree()
+    SplayTree2()
     {
         root = null;
     }
     
-    SplayTree(T value)
+    SplayTree2(T value)
     {
         root = new SplayNode<T>(value);
     }
@@ -113,7 +114,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     //      #####     #####     #####     #####     #####     #####     #####
     // #####     #####     #####     #####     #####     #####     #####     #####
 
-    private SplayNode<T> leftRotation(SplayNode<T> node)
+    public SplayNode<T> leftRotation(SplayNode<T> node)
     {
     	SplayNode<T> pivot = node.rightChild;
         node.rightChild = pivot.leftChild;
@@ -122,7 +123,7 @@ public class SplayTree<T extends Comparable<? super T>> {
         return pivot;    
     }
     
-    private SplayNode<T> rightRotation(SplayNode<T> node)
+    public SplayNode<T> rightRotation(SplayNode<T> node)
     {
     	SplayNode<T> pivot = node.leftChild;
         node.leftChild = pivot.rightChild;
@@ -190,56 +191,31 @@ public class SplayTree<T extends Comparable<? super T>> {
     
     private SplayNode<T> _splay(SplayNode<T> currentNode, T value)
     {
-    	 if ((currentNode == null) || (value.compareTo(currentNode.getValue()) == 0)) return currentNode;
-    	 
-    	 if (value.compareTo(currentNode.getValue()) < 0)
-    	 {
+    	if (currentNode == null || currentNode.getValue().compareTo(value) == 0)
+    		return currentNode;
+    	if (value.compareTo(currentNode.getValue()) < 0)
+    	{
     		if (value.compareTo(currentNode.leftChild.getValue()) < 0)
     		{
-    			currentNode.leftChild.leftChild = _splay(currentNode.leftChild.leftChild,value);
-    			currentNode.leftChild = rightRotation(currentNode.leftChild);
-    			
+    		currentNode.leftChild.leftChild = _splay(currentNode.leftChild.leftChild,value);
+    		// Right Rotation
+    		currentNode = rightRotation(currentNode);
+    			// Second Right Rotation
+    			if (currentNode.leftChild != null)
+    			{
+    			currentNode = rightRotation(currentNode);
+    			}
     		}
     		else if (value.compareTo(currentNode.leftChild.getValue()) > 0)
     		{
     			currentNode.leftChild.rightChild = _splay(currentNode.leftChild.rightChild,value);
-    			currentNode.leftChild = leftRotation(currentNode.leftChild);  
+    			// Right Rotation
+    			
+    		
     		}
-    	 
-    	 
-    	 if (currentNode.leftChild == null)
-    	 {
-    		 return currentNode;
-    	 }
-    	 else {
-    		 return rightRotation(currentNode);
-    	 }
-    	 }
-    	 else 
-         {  
-             
-             if (currentNode.rightChild == null) return currentNode;  
-   
-           
-             if (currentNode.rightChild.getValue().compareTo(value) > 0)  
-             {  
-                 currentNode.rightChild.leftChild = _splay(currentNode.rightChild.leftChild, value);  
-   
-                 if (currentNode.rightChild.leftChild != null)  
-                     currentNode.rightChild = rightRotation(currentNode.rightChild);  
-             }  
-             else if (currentNode.rightChild.getValue().compareTo(value) < 0)
-             {  
-                 currentNode.rightChild.rightChild = _splay(currentNode.rightChild.rightChild, value);  
-                 currentNode = leftRotation(currentNode);  
-             }  
-   
-             
-             if (currentNode.rightChild == null) 
-                 return currentNode;
-             else 
-                 return leftRotation(currentNode);  
-         } 
+    	}//TBD
+    	
+    	return currentNode;
     }
     
     	
