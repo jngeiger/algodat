@@ -110,19 +110,18 @@ public class SplayTree<T extends Comparable<? super T>> {
 
     private SplayNode<T> leftRotation(SplayNode<T> node)
     {
-    	SplayNode<T> newRoot = node.rightChild;
-    	node.rightChild = newRoot.leftChild;
-    	newRoot.leftChild = node;
-    	return newRoot;
-    	
+    	SplayNode<T> newTop = node.rightChild;
+    	node.rightChild = newTop.leftChild;
+    	newTop.leftChild = node;
+    	return newTop;	
     }
     
     private SplayNode<T> rightRotation(SplayNode<T> node)
     {
-        SplayNode<T> newRoot = node.leftChild;
-        node.leftChild = newRoot.rightChild;
-        newRoot.rightChild = node;
-        return newRoot;
+        SplayNode<T> newTop = node.leftChild;
+        node.leftChild = newTop.rightChild;
+        newTop.rightChild = node;
+        return newTop;
     }    
 
     public void printWayToNode(T value)
@@ -176,10 +175,20 @@ public class SplayTree<T extends Comparable<? super T>> {
     			System.out.println(currentNode.getValue());
     		}
     	}
-    
-    	
-    
-    	
+    }	
+    private void splay(T value)
+    {
+    		root = _splay(root,value);
     }
-    
+    	
+    private SplayNode<T> _splay(SplayNode<T> node, T value)
+    {
+    		//TBD
+    		return node;
+    }
+    	
 }
+    	
+   
+    
+
