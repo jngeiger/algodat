@@ -231,11 +231,7 @@ public class SplayTree<T extends Comparable<? super T>> {
              {
             	 return leftRotation(currentNode);  
              }
-             
          } 
-    	 
-    	 
-    	 
     	 return currentNode;
     	 
     }
