@@ -190,7 +190,11 @@ public class SplayTree<T extends Comparable<? super T>> {
     
     private SplayNode<T> _splay(SplayNode<T> currentNode, T value)
     {
-    	 if ((currentNode == null) || (value.compareTo(currentNode.getValue()) == 0)) return currentNode;
+    	 if (currentNode == null) 
+    			 return currentNode;
+    	 
+    	if (value.compareTo(currentNode.getValue()) == 0)
+    			 return currentNode;
     	 
     	 if (value.compareTo(currentNode.getValue()) < 0)
     	 {

@@ -19,7 +19,7 @@ public class First {
         }
 //        
         System.out.println(complexTree);
-        complexTree.splay(6);
+        complexTree.splay(5);
         System.out.println(complexTree);
         
         
