@@ -13,15 +13,13 @@ public class First {
 //        {
 //            complexTree.insertRec(v);
 //        }
-        for (int i = 0; i < 16; i++)
-        {
-        	complexTree.insertRec(i);
-        }
-//        
-        System.out.println(complexTree);
-        complexTree.splay(5);
-        System.out.println(complexTree);
-        
+        SplayTree2<Integer> myTree = new SplayTree2<Integer>(new SplayNode<Integer>(4));
+        myTree.insert(22);
+        myTree.insert(2);
+        myTree.insert(45);
+        myTree.insert(20);
+        System.out.println(myTree);
+        System.out.println(myTree.isIn(222));
         
        
         

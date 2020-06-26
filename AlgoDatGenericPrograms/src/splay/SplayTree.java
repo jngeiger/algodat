@@ -113,7 +113,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     //      #####     #####     #####     #####     #####     #####     #####
     // #####     #####     #####     #####     #####     #####     #####     #####
 
-    private SplayNode<T> leftRotation(SplayNode<T> node)
+    public SplayNode<T> leftRotation(SplayNode<T> node)
     {
     	SplayNode<T> pivot = node.rightChild;
         node.rightChild = pivot.leftChild;
@@ -122,7 +122,7 @@ public class SplayTree<T extends Comparable<? super T>> {
         return pivot;    
     }
     
-    private SplayNode<T> rightRotation(SplayNode<T> node)
+    public SplayNode<T> rightRotation(SplayNode<T> node)
     {
     	SplayNode<T> pivot = node.leftChild;
         node.leftChild = pivot.rightChild;
