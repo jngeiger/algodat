@@ -283,29 +283,43 @@ public class SplayTree<T extends Comparable<? super T>> {
     	   
     public void splay_delete(T value)
     {
+    	// SPLAY
     	root = _splay(root,value);
-    	T min = null;
+    	
+    	// Value not found after splaying
     	if (root.getValue().compareTo(value) != 0)
     	{
     		return;
     	}
+    	
+    	// Value found, delete
     	else {
-    		SplayNode<T> currentNode = root.rightChild;
-    		if (currentNode.leftChild == null)
+    		
+    		// Right Subtree empty
+    		if (root.rightChild == null)
+    			root = root.leftChild;
+    			
+    		// Right Subtree has no left Child
+    		else if (root.rightChild.leftChild == null)
     		{
-    			root.setValue(currentNode.getValue());
-    			root.rightChild = currentNode.rightChild;
+    			SplayNode<T> leftSubtree = root.leftChild;
+    			root = root.rightChild;
+    			root.leftChild = leftSubtree;
     		}
+    		
+    		// Get smallest value in right subtree and delete
     		else {
-    		SplayNode<T> parent = root.rightChild;
-    		while (currentNode.leftChild != null)
-    		{
-    			parent = currentNode;
-    			currentNode = currentNode.leftChild;
+    			SplayNode<T> currentNode = root.rightChild.leftChild;
+    			SplayNode<T> parent = currentNode;
+    			while (currentNode.leftChild != null)
+    			{
+    				parent = currentNode;
+    				currentNode = currentNode.leftChild;
+    			}
+    			root.setValue(currentNode.getValue());
+    			parent.leftChild = null;
     		}
-    		root.setValue(currentNode.getValue());
-    		parent.leftChild = currentNode.rightChild;
-    		}
+    		
     	}
     }
     

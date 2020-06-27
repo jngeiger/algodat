@@ -27,7 +27,7 @@ public class First {
         
 //        complexTree.splay(67);
         System.out.println(complexTree);
- complexTree.splay_delete(22);
+ complexTree.splay_delete(12);
         
         System.out.println(complexTree);
        
