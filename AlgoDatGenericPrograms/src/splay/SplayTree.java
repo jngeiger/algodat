@@ -113,7 +113,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     //      #####     #####     #####     #####     #####     #####     #####
     // #####     #####     #####     #####     #####     #####     #####     #####
 
-    private SplayNode<T> leftRotation(SplayNode<T> node)
+    public SplayNode<T> leftRotation(SplayNode<T> node)
     {
     	SplayNode<T> pivot = node.rightChild;
         node.rightChild = pivot.leftChild;
@@ -122,7 +122,7 @@ public class SplayTree<T extends Comparable<? super T>> {
         return pivot;    
     }
     
-    private SplayNode<T> rightRotation(SplayNode<T> node)
+    public SplayNode<T> rightRotation(SplayNode<T> node)
     {
     	SplayNode<T> pivot = node.leftChild;
         node.leftChild = pivot.rightChild;
@@ -188,57 +188,96 @@ public class SplayTree<T extends Comparable<? super T>> {
     		root = _splay(root,value);
     }
     
-    private SplayNode<T> _splay(SplayNode<T> currentNode, T value)
-    {
-    	 if ((currentNode == null) || (value.compareTo(currentNode.getValue()) == 0)) return currentNode;
-    	 
-    	 if (value.compareTo(currentNode.getValue()) < 0)
-    	 {
-    		if (value.compareTo(currentNode.leftChild.getValue()) < 0)
-    		{
-    			currentNode.leftChild.leftChild = _splay(currentNode.leftChild.leftChild,value);
-    			currentNode.leftChild = rightRotation(currentNode.leftChild);
-    			
-    		}
-    		else if (value.compareTo(currentNode.leftChild.getValue()) > 0)
-    		{
-    			currentNode.leftChild.rightChild = _splay(currentNode.leftChild.rightChild,value);
-    			currentNode.leftChild = leftRotation(currentNode.leftChild);  
-    		}
-    		
-    		
-    		if (currentNode.leftChild != null)
-			{
-    			return rightRotation(currentNode);
-			}
-	
-    	 }
-    	 
-    	 else 
-         {  
-             if (currentNode.rightChild.getValue().compareTo(value) > 0)  
-             {  
-                 currentNode.rightChild.leftChild = _splay(currentNode.rightChild.leftChild, value);  
-                 currentNode.rightChild = rightRotation(currentNode.rightChild);  
-             }  
-             else if (currentNode.rightChild.getValue().compareTo(value) < 0)
-             {  
-                 currentNode.rightChild.rightChild = _splay(currentNode.rightChild.rightChild, value);  
-                 currentNode.rightChild = leftRotation(currentNode.rightChild);  
-             }  
-             
-             if (currentNode.rightChild != null) 
-             {
-            	 return leftRotation(currentNode);  
-             }
-             
-         } 
-    	 
-    	 
-    	 
-    	 return currentNode;
-    	 
-    }
+    
+    
+    	private SplayNode<T> _splay(SplayNode<T> node, T value)
+        {
+            if ((node == null) || (value.compareTo(node.getValue()) == 0)) return node;
+
+            if (node.getValue().compareTo(value) > 0) // node.value > value  
+            {  
+                // Node nicht im Baum 
+                if (node.leftChild == null) return node;  
+      
+                // Zig-Zig (Left Left) 
+                if (node.leftChild.getValue().compareTo(value) > 0) // node.left.value > value
+                {  
+                    node.leftChild.leftChild = _splay(node.leftChild.leftChild, value);  
+      
+                    // Erste Rotation 
+                    node = rightRotation(node);  
+                }  
+                else if (node.leftChild.getValue().compareTo(value) < 0) // Zig-Zag (Left Right)  
+                {  
+                    node.leftChild.rightChild = _splay(node.leftChild.rightChild, value);  
+      
+                    // Rotation fuer node.left  
+                    if (node.leftChild.rightChild != null)  
+                        node.leftChild = leftRotation(node.leftChild);  
+                }  
+      
+                // Zweite Rotation fuer node  
+                if (node.leftChild == null) 
+                    return node;
+                else 
+                    return rightRotation(node);  
+            }  
+            else 
+            {  
+                // Node nicht im Baum
+                if (node.rightChild == null) return node;  
+      
+                // Zag-Zig (Right Left)  
+                if (node.rightChild.getValue().compareTo(value) > 0)  
+                {  
+                    node.rightChild.leftChild = _splay(node.rightChild.leftChild, value);  
+      
+                    // Erste Rotation fuer node.right  
+                    if (node.rightChild.leftChild != null)  
+                        node.rightChild = rightRotation(node.rightChild);  
+                }  
+                else if (node.rightChild.getValue().compareTo(value) < 0)// Zag-Zag (Right Right)  
+                {  
+                    node.rightChild.rightChild = _splay(node.rightChild.rightChild, value);  
+                    node = leftRotation(node);  
+                }  
+      
+                // Zweite Rotation 
+                if (node.rightChild == null) 
+                    return node;
+                else 
+                    return leftRotation(node);  
+            } 
+        }
+    	   public void insert(T value)
+    	    {
+    	        
+    	        if (root == null) 
+    	        {
+    	            root = new SplayNode<T>(value); 
+    	            return;
+    	        }
+
+    	        SplayNode<T> newNode = new SplayNode<T>(value);
+    	        
+    	        // Knoten oder des Mutter in die Wurzel splayen
+    	        root = _splay(root, value);
+    	        
+    	        // Knoten und gesplayten Baum zusammenbauen
+    	        if (root.getValue().compareTo(value) >= 0)
+    	        {
+    	            newNode.rightChild = root;
+    	            newNode.leftChild = root.leftChild;
+    	            root.leftChild = null;
+    	            root = newNode;
+    	        }
+    	        else {
+    	            newNode.leftChild = root;
+    	            newNode.rightChild = root.rightChild;
+    	            root.rightChild = null;
+    	            root = newNode;
+    	        }
+    	    }
     
     	
 }
