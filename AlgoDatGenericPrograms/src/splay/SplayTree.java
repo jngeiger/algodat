@@ -188,6 +188,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     		root = _splay(root,value);
     }
     
+
     
     
     	private SplayNode<T> _splay(SplayNode<T> node, T value)
@@ -278,6 +279,59 @@ public class SplayTree<T extends Comparable<? super T>> {
     	            root = newNode;
     	        }
     	    }
+
+    private SplayNode<T> splay(SplayNode<T> currentNode, T value)
+    {
+    	 if (currentNode == null) 
+    			 return currentNode;
+    	 
+    	if (value.compareTo(currentNode.getValue()) == 0)
+    			 return currentNode;
+    	 
+    	 if (value.compareTo(currentNode.getValue()) < 0)
+    	 {
+    		if (value.compareTo(currentNode.leftChild.getValue()) < 0)
+    		{
+    			currentNode.leftChild.leftChild = _splay(currentNode.leftChild.leftChild,value);
+    			currentNode = rightRotation(currentNode);
+    			
+    		}
+    		else if (value.compareTo(currentNode.leftChild.getValue()) > 0)
+    		{
+    			currentNode.leftChild.rightChild = _splay(currentNode.leftChild.rightChild,value);
+    			currentNode = leftRotation(currentNode);  
+    		}
+    		
+    		
+    		if (currentNode.leftChild != null)
+			{
+    			return rightRotation(currentNode);
+			}
+	
+    	 }
+    	 
+    	 else 
+         {  
+             if (currentNode.rightChild.getValue().compareTo(value) > 0)  
+             {  
+                 currentNode.rightChild.leftChild = _splay(currentNode.rightChild.leftChild, value);  
+                 currentNode = rightRotation(currentNode);  
+             }  
+             else if (currentNode.rightChild.getValue().compareTo(value) < 0)
+             {  
+                 currentNode.rightChild.rightChild = _splay(currentNode.rightChild.rightChild, value);  
+                 currentNode = leftRotation(currentNode);  
+             }  
+             
+             if (currentNode.rightChild != null) 
+             {
+            	 return leftRotation(currentNode);  
+             }
+         } 
+    	 return currentNode;
+    	 
+    }
+
     
     	
 }
