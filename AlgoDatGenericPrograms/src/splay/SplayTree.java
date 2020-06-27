@@ -279,6 +279,31 @@ public class SplayTree<T extends Comparable<? super T>> {
     	            root = newNode;
     	        }
     	    }
+    	   
+    public void delete(SplayNode<T> currentNode, T value)
+    {
+    	root = _splay(root,value);
+    	if (root.getValue().compareTo(value) != 0)
+    	{
+    		return;
+    	}
+    	else {
+    		if (root.rightChild != null)
+    		{
+    			 SplayNode<T> min = _getMin(root.rightChild);
+    		}
+    	}
+    }
+    
+    private SplayNode<T> _getMin(SplayNode<T> currentNode)
+    {
+    	
+    	while (currentNode.leftChild.leftChild != null)
+    	{
+    		currentNode = currentNode.leftChild;
+    	}
+    	return currentNode;
+    }
 
     private SplayNode<T> splay(SplayNode<T> currentNode, T value)
     {
@@ -327,6 +352,7 @@ public class SplayTree<T extends Comparable<? super T>> {
              {
             	 return leftRotation(currentNode);  
              }
+            
          } 
     	 return currentNode;
     	 
