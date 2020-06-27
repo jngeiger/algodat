@@ -6,14 +6,31 @@ public class First {
     {
         SplayTree<Integer> complexTree = new SplayTree<Integer>();
 
-        complexTree.insertRec(2);
-        complexTree.insertRec(3);
-        complexTree.insertRec(1);
+        complexTree.insert(2);
+        complexTree.insert(126);
+        complexTree.insert(4);
+        complexTree.insert(3);
+        complexTree.insert(12);
+        complexTree.insert(13);
+        complexTree.insert(15);
+        complexTree.insert(28);
+        complexTree.insert(29);
+        complexTree.insert(315);
+        complexTree.insert(32);
+        complexTree.insert(57);
+        complexTree.insert(60);
+        complexTree.insert(99);
+        complexTree.insert(77);
+        complexTree.insert(21);
+        complexTree.insert(18);
+        
+        
+//        complexTree.splay(67);
         System.out.println(complexTree);
-        complexTree.root = complexTree.rightRotation(complexTree.root);
+ complexTree.splay_delete(22);
+        
+        System.out.println(complexTree);
        
-        System.out.println(complexTree);
-        complexTree.root = complexTree.rightRotation(complexTree.root);
         
 
         

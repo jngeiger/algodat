@@ -1,5 +1,6 @@
 package splay;
 
+import avl.AVLNode;
 
 public class SplayTree<T extends Comparable<? super T>> {
     
@@ -280,29 +281,41 @@ public class SplayTree<T extends Comparable<? super T>> {
     	        }
     	    }
     	   
-    public void delete(SplayNode<T> currentNode, T value)
+    public void splay_delete(T value)
     {
     	root = _splay(root,value);
+    	T min = null;
     	if (root.getValue().compareTo(value) != 0)
     	{
     		return;
     	}
     	else {
-    		if (root.rightChild != null)
+    		SplayNode<T> currentNode = root.rightChild;
+    		if (currentNode.leftChild == null)
     		{
-    			 SplayNode<T> min = _getMin(root.rightChild);
+    			root.setValue(currentNode.getValue());
+    			root.rightChild = currentNode.rightChild;
+    		}
+    		else {
+    		SplayNode<T> parent = root.rightChild;
+    		while (currentNode.leftChild != null)
+    		{
+    			parent = currentNode;
+    			currentNode = currentNode.leftChild;
+    		}
+    		root.setValue(currentNode.getValue());
+    		parent.leftChild = currentNode.rightChild;
     		}
     	}
     }
     
-    private SplayNode<T> _getMin(SplayNode<T> currentNode)
+    private T _getMin(SplayNode<T> currentNode)
     {
-    	
-    	while (currentNode.leftChild.leftChild != null)
-    	{
-    		currentNode = currentNode.leftChild;
-    	}
-    	return currentNode;
+        while(currentNode.leftChild != null)
+        {
+            currentNode = currentNode.leftChild;
+        }
+        return currentNode.getValue();
     }
 
     private SplayNode<T> splay(SplayNode<T> currentNode, T value)
